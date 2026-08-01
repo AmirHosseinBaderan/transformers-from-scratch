@@ -27,14 +27,17 @@ class Vocabulary:
     def __contains__(self, item):
         return item in self._token_to_id
 
-    def add_tokens(self, token):
-        """
-        Add a token to the vocabulary.
+    def add_tokens(
+            self,
+            tokens: list[str],
+    ) -> None:
+        for token in tokens:
+            self.add_token(token)
 
-        Returns the token ID. If the token already exists,
-        its existing ID is returned.
-        """
-
+    def add_token(
+            self,
+            token: str,
+    ) -> int:
         if not isinstance(token, str):
             raise TypeError("token must be a string")
 
@@ -45,6 +48,7 @@ class Vocabulary:
             return self._token_to_id[token]
 
         token_id = len(self)
+
         self._token_to_id[token] = token_id
         self._id_to_token[token_id] = token
 
