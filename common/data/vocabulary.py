@@ -27,32 +27,35 @@ class Vocabulary:
     def __contains__(self, item):
         return item in self._token_to_id
 
-    def add_tokens(
-            self,
-            tokens: list[str],
-    ) -> None:
-        for token in tokens:
-            self.add_token(token)
-
     def add_token(
             self,
             token: str,
     ) -> int:
+    
         if not isinstance(token, str):
             raise TypeError("token must be a string")
-
+    
         if token == "":
-            raise ValueError("token cannot be an empty string")
-
+            raise ValueError("token cannot be empty")
+    
         if token in self._token_to_id:
             return self._token_to_id[token]
-
+    
         token_id = len(self)
-
+    
         self._token_to_id[token] = token_id
         self._id_to_token[token_id] = token
-
+    
         return token_id
+
+
+    def add_tokens(
+            self,
+            tokens: list[str],
+    ) -> None:
+
+        for token in tokens:
+            self.add_token(token)
 
     def token_to_id(
             self,
