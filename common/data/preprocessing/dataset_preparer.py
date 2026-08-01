@@ -64,7 +64,7 @@ class DatasetPreparer:
 
                 if len(buffer) >= buffer_size:
                     buffer.tofile(file)
-                    buffer.clear()
+                    del buffer[:]
 
             if buffer:
                 buffer.tofile(file)
