@@ -3,7 +3,7 @@ from pathlib import Path
 import torch
 from torch.utils.data import DataLoader
 
-from model import MiniGPT
+from mini_gpt.model import MiniGPT
 
 from common.data.dataset import TextDataset
 
@@ -11,19 +11,11 @@ from common.training.losses import (
     LanguageModelLoss,
 )
 
-from config import GPTConfig
+from mini_gpt.config import GPTConfig
 from common.data.vocabulary import Vocabulary
 from common.configs.model_config import ModelConfig
 
-from train_one_epoch import train_one_epoch
-
-
-
-device = (
-    "cuda"
-    if torch.cuda.is_available()
-    else "cpu"
-)
+from mini_gpt.train_one_epoch import train_one_epoch
 
 def main():
 
@@ -56,7 +48,7 @@ def main():
     )
 
 
-    model.to(device)
+    model.to(GPTConfig.DEVICE)
 
 
     optimizer = torch.optim.AdamW(
@@ -76,7 +68,7 @@ def main():
             loader,
             criterion,
             optimizer,
-            device,
+            GPTConfig.DEVICE,
         )
 
         print(

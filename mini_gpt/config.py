@@ -1,4 +1,11 @@
+import torch
+
 class GPTConfig:
+    DEVICE = (
+        "cuda"
+        if torch.cuda.is_available()
+        else "cpu"
+    )
 
     BLOCK_SIZE = 128
 
