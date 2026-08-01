@@ -15,6 +15,8 @@ from config import GPTConfig
 from common.data.vocabulary import Vocabulary
 from common.configs.model_config import ModelConfig
 
+from train_one_epoch import train_one_epoch
+
 
 
 device = (
@@ -66,48 +68,19 @@ def main():
     criterion = LanguageModelLoss()
 
 
-
-    model.train()
-
-
     for epoch in range(
         GPTConfig.EPOCHS
     ):
-
-        total_loss = 0
-
-
-        for x,y in loader:
-
-
-            x = x.to(device)
-
-            y = y.to(device)
-
-
-            logits = model(x)
-
-
-            loss = criterion(
-                logits,
-                y,
-            )
-
-
-            optimizer.zero_grad()
-
-
-            loss.backward()
-
-
-            optimizer.step()
-
-
-            total_loss += loss.item()
-
+        avg_loss = train_one_epoch(
+            model,
+            loader,
+            criterion,
+            optimizer,
+            device,
+        )
 
         print(
-            f"Epoch {epoch+1} | Loss {total_loss / len(loader):.4f}"
+            f"Epoch {epoch+1} | Loss {avg_loss:.4f}"
         )
 
 
