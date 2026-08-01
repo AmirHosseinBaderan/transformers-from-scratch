@@ -1,33 +1,43 @@
 from __future__ import annotations
 
+from collections import Counter
+from typing import Iterable
+
 from common.data.vocabulary import Vocabulary
-from common.data.builders.vocabulary_builder import VocabularyBuilder
 
 
-class CharacterVocabularyBuilder(VocabularyBuilder):
-    """
-    Builds a character-level vocabulary from raw text.
-    """
+class CharacterVocabularyBuilder:
 
     def __init__(
-        self,
-        special_tokens: list[str] | None = None,
-    ) -> None:
-        self._special_tokens = special_tokens or []
+            self,
+            special_tokens: list[str] | None = None,
+    ):
+        self._special_tokens = special_tokens or [
+            "<PAD>",
+            "<UNK>",
+            "<BOS>",
+            "<EOS>",
+        ]
+
 
     def build(
-        self,
-        text: str,
+            self,
+            texts: Iterable[str],
     ) -> Vocabulary:
-        if not isinstance(text, str):
-            raise TypeError("text must be a string.")
+
+        counter = Counter()
+
+        for text in texts:
+            counter.update(text)
+
 
         vocabulary = Vocabulary(
-            special_tokens=self._special_tokens,
+            special_tokens=self._special_tokens
         )
 
-        characters = sorted(set(text))
 
-        vocabulary.add_tokens(characters)
+        for char, _ in counter.most_common():
+            vocabulary.add_token(char)
+
 
         return vocabulary
