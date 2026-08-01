@@ -1,0 +1,115 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="absl-py" />
+          <option value="asttokens" />
+          <option value="astunparse" />
+          <option value="attrs" />
+          <option value="bleach" />
+          <option value="certifi" />
+          <option value="charset-normalizer" />
+          <option value="cloudpickle" />
+          <option value="contourpy" />
+          <option value="cycler" />
+          <option value="decorator" />
+          <option value="executing" />
+          <option value="Farama-Notifications" />
+          <option value="fastjsonschema" />
+          <option value="flatbuffers" />
+          <option value="fonttools" />
+          <option value="gast" />
+          <option value="google-pasta" />
+          <option value="grpcio" />
+          <option value="gym-notices" />
+          <option value="gymnasium" />
+          <option value="h5py" />
+          <option value="idna" />
+          <option value="ipython" />
+          <option value="ipython_pygments_lexers" />
+          <option value="jedi" />
+          <option value="jsonschema" />
+          <option value="jsonschema-specifications" />
+          <option value="jupyter_core" />
+          <option value="jupytext" />
+          <option value="kaggle" />
+          <option value="kagglesdk" />
+          <option value="keras" />
+          <option value="kiwisolver" />
+          <option value="libclang" />
+          <option value="markdown-it-py" />
+          <option value="matplotlib" />
+          <option value="matplotlib-inline" />
+          <option value="mdit-py-plugins" />
+          <option value="mdurl" />
+          <option value="ml_dtypes" />
+          <option value="namex" />
+          <option value="nbformat" />
+          <option value="networkx" />
+          <option value="opt_einsum" />
+          <option value="optree" />
+          <option value="packaging" />
+          <option value="parso" />
+          <option value="pexpect" />
+          <option value="pillow" />
+          <option value="platformdirs" />
+          <option value="prompt_toolkit" />
+          <option value="protobuf" />
+          <option value="psutil" />
+          <option value="ptyprocess" />
+          <option value="pure_eval" />
+          <option value="pygame" />
+          <option value="Pygments" />
+          <option value="pyparsing" />
+          <option value="python-dotenv" />
+          <option value="python-slugify" />
+          <option value="PyYAML" />
+          <option value="referencing" />
+          <option value="requests" />
+          <option value="rich" />
+          <option value="rpds-py" />
+          <option value="setuptools" />
+          <option value="stack-data" />
+          <option value="tensorflow" />
+          <option value="termcolor" />
+          <option value="text-unidecode" />
+          <option value="tqdm" />
+          <option value="traitlets" />
+          <option value="typing_extensions" />
+          <option value="urllib3" />
+          <option value="wcwidth" />
+          <option value="webencodings" />
+          <option value="wheel" />
+          <option value="wrapt" />
+          <option value="cuda-bindings" />
+          <option value="cuda-pathfinder" />
+          <option value="cuda-toolkit" />
+          <option value="nvidia-cublas" />
+          <option value="nvidia-cuda-cupti" />
+          <option value="nvidia-cuda-nvrtc" />
+          <option value="nvidia-cuda-runtime" />
+          <option value="nvidia-cudnn-cu13" />
+          <option value="nvidia-cufft" />
+          <option value="nvidia-cufile" />
+          <option value="nvidia-curand" />
+          <option value="nvidia-cusolver" />
+          <option value="nvidia-cusparse" />
+          <option value="nvidia-cusparselt-cu13" />
+          <option value="nvidia-nccl-cu13" />
+          <option value="nvidia-nvjitlink" />
+          <option value="nvidia-nvshmem-cu13" />
+          <option value="nvidia-nvtx" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyStubPackagesAdvertiser" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <list>
+          <option value="pandas" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
