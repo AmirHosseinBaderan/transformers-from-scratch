@@ -1,24 +1,46 @@
 from __future__ import annotations
 
-from common.data.tokenizer import Tokenizer
+from typing import Iterable
+
 from common.data.vocabulary import Vocabulary
 
-class CharacterTokenizer(Tokenizer):
-    """
-    Character-Level Tokenizer
-    """
 
-    def __init__(self, vocabulary: Vocabulary):
+class CharacterTokenizer:
+
+    def __init__(
+            self,
+            vocabulary: Vocabulary,
+    ):
         self._vocabulary = vocabulary
 
-    @property
-    def vocabulary(self) -> Vocabulary:
-        return self._vocabulary
 
-    def encode(self,text:str)-> list[int]:
-        tokens = list(text)
-        return self._vocabulary.encode(tokens)
+    def encode(
+            self,
+            text: str,
+    ) -> list[int]:
 
-    def decode(self,token_ids:list[int])-> str:
-        tokens = self._vocabulary.decode(token_ids)
-        return "".join(tokens)
+        return [
+            self._vocabulary.token_to_id(char)
+            for char in text
+        ]
+
+
+    def encode_iterable(
+            self,
+            texts: Iterable[str],
+    ):
+
+        for text in texts:
+            for char in text:
+                yield self._vocabulary.token_to_id(char)
+
+
+    def decode(
+            self,
+            ids: list[int],
+    ) -> str:
+
+        return "".join(
+            self._vocabulary.id_to_token(i)
+            for i in ids
+        )
