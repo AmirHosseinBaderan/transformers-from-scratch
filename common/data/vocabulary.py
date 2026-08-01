@@ -115,3 +115,7 @@ class Vocabulary:
             vocabulary._id_to_token[token_id] = token
 
         return vocabulary
+
+    @property
+    def size(self):
+        return len(self._token_to_id)
