@@ -33,7 +33,7 @@ from mini_gpt.trainer import Trainer
 
 
 def build_trainer() -> Trainer:
-    # Load datasets
+    # Load datasets - use lazy loading
     train_dataset = TextDataset(
         Path("common/data/processed/train.bin"),
         ModelConfig.BLOCK_SIZE,
@@ -44,30 +44,33 @@ def build_trainer() -> Trainer:
         ModelConfig.BLOCK_SIZE,
     )
 
-    # Configure DataLoader for small memory systems
-    # pin_memory=True speeds up CPU->GPU transfer (only for CUDA)
-    # num_workers parallelizes data loading
-    # persistent_workers keeps workers alive between epochs
+    # ULTRA LOW MEMORY DataLoader configuration
+    # num_workers=0: CRITICAL - each worker maps the entire file into memory
+    # persistent_workers=False: Don't keep workers alive
+    # prefetch_factor=None: No prefetching with single process
     train_loader = DataLoader(
         train_dataset,
         batch_size=ModelConfig.BATCH_SIZE,
         shuffle=True,
-        pin_memory=ModelConfig.PIN_MEMORY and torch.cuda.is_available(),
-        num_workers=ModelConfig.NUM_WORKERS,
-        prefetch_factor=ModelConfig.PREFETCH_FACTOR if ModelConfig.NUM_WORKERS > 0 else None,
-        persistent_workers=ModelConfig.NUM_WORKERS > 0,
-        drop_last=True,  # Drop incomplete batches to avoid memory spikes
+        pin_memory=False,  # Disable for CPU/low-memory GPU
+        num_workers=0,  # CRITICAL: Single process to avoid multiple file mappings
+        prefetch_factor=None,
+        persistent_workers=False,
+        drop_last=True,
+        # Reduce memory fragmentation
+        multiprocessing_context=None,  # Use fork instead of spawn
     )
 
     val_loader = DataLoader(
         val_dataset,
         batch_size=ModelConfig.BATCH_SIZE,
         shuffle=False,
-        pin_memory=ModelConfig.PIN_MEMORY and torch.cuda.is_available(),
-        num_workers=ModelConfig.NUM_WORKERS,
-        prefetch_factor=ModelConfig.PREFETCH_FACTOR if ModelConfig.NUM_WORKERS > 0 else None,
-        persistent_workers=ModelConfig.NUM_WORKERS > 0,
+        pin_memory=False,
+        num_workers=0,  # CRITICAL: Single process
+        prefetch_factor=None,
+        persistent_workers=False,
         drop_last=True,
+        multiprocessing_context=None,
     )
 
     vocabulary = Vocabulary.load(ModelConfig.VOCAB_PATH)
@@ -131,7 +134,7 @@ def build_trainer() -> Trainer:
 def main():
     # Log memory optimization settings
     logger.info("=" * 60)
-    logger.info("Memory-Optimized Training Configuration")
+    logger.info("ULTRA LOW-MEMORY Training Configuration")
     logger.info("=" * 60)
     logger.info(f"Device: {ModelConfig.DEVICE}")
     logger.info(f"Batch Size: {ModelConfig.BATCH_SIZE}")
@@ -140,9 +143,15 @@ def main():
     logger.info(f"Mixed Precision: {ModelConfig.USE_MIXED_PRECISION}")
     logger.info(f"Gradient Checkpointing: {ModelConfig.USE_GRADIENT_CHECKPOINTING}")
     logger.info(f"Gradient Clip Norm: {ModelConfig.GRADIENT_CLIP_NORM}")
-    logger.info(f"DataLoader Workers: {ModelConfig.NUM_WORKERS}")
-    logger.info(f"Pin Memory: {ModelConfig.PIN_MEMORY}")
+    logger.info(f"DataLoader Workers: 0 (single process)")
+    logger.info(f"Pin Memory: False")
+    logger.info(f"Persistent Workers: False")
     logger.info("=" * 60)
+
+    # Monitor memory before starting
+    if torch.cuda.is_available():
+        torch.cuda.reset_peak_memory_stats()
+        logger.info(f"Initial GPU memory allocated: {torch.cuda.memory_allocated() / 1024**2:.1f} MB")
 
     trainer = build_trainer()
 
@@ -165,11 +174,13 @@ def main():
     except RuntimeError as e:
         if "out of memory" in str(e).lower():
             logger.error("Out of memory error! Try:")
-            logger.error("  1. Reduce BATCH_SIZE in config.py")
-            logger.error("  2. Increase GRADIENT_ACCUMULATION_STEPS")
-            logger.error("  3. Enable USE_GRADIENT_CHECKPOINTING")
-            logger.error("  4. Reduce NUM_LAYERS or EMBEDDING_DIM")
-            logger.error("  5. Reduce BLOCK_SIZE")
+            logger.error("  1. Regenerate dataset: python3 prepare_dataset.py")
+            logger.error("  2. Reduce BATCH_SIZE in config.py")
+            logger.error("  3. Increase GRADIENT_ACCUMULATION_STEPS")
+            logger.error("  4. Enable USE_GRADIENT_CHECKPOINTING")
+            logger.error("  5. Reduce NUM_LAYERS or EMBEDDING_DIM")
+            logger.error("  6. Reduce BLOCK_SIZE")
+            logger.error("  7. Close other applications")
         raise
     finally:
         # Final memory cleanup
