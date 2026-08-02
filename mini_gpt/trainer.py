@@ -22,21 +22,21 @@ if TYPE_CHECKING:
 
 class Trainer:
     """
-    Orchestrates the training loop for MiniGPT with memory optimizations.
+    Orchestrates the training loop for MiniGPT with ultra low-memory optimizations.
     """
 
     def __init__(
-            self,
-            model: MiniGPT,
-            optimizer: torch.optim.Optimizer,
-            criterion: LanguageModelLoss,
-            train_loader: DataLoader,
-            val_loader: DataLoader,
-            device: str,
-            checkpoint_manager: CheckpointManager,
-            early_stopping: EarlyStopping,
-            tb_logger: TensorBoardLogger,
-            epochs: int,
+        self,
+        model: MiniGPT,
+        optimizer: torch.optim.Optimizer,
+        criterion: LanguageModelLoss,
+        train_loader: DataLoader,
+        val_loader: DataLoader,
+        device: str,
+        checkpoint_manager: CheckpointManager,
+        early_stopping: EarlyStopping,
+        tb_logger: TensorBoardLogger,
+        epochs: int,
     ):
         self.model = model
         self.optimizer = optimizer
@@ -49,23 +49,29 @@ class Trainer:
         self.tb_logger = tb_logger
         self.epochs = epochs
 
-    def _cleanup_memory(self) -> None:
+    def _cleanup_memory(self, clear_cuda: bool = True) -> None:
         """
-        Clean up GPU memory and run garbage collection.
+        Aggressive memory cleanup.
         """
-        if torch.cuda.is_available():
+        # Clear CUDA cache
+        if clear_cuda and torch.cuda.is_available():
             torch.cuda.empty_cache()
-        gc.collect()
+            torch.cuda.reset_peak_memory_stats()
+
+        # Run garbage collection multiple times
+        for _ in range(3):
+            gc.collect()
 
     def train(self, start_epoch: int = 0) -> None:
         """
-        Run the training loop with memory optimizations.
+        Run the training loop with ultra low-memory optimizations.
 
         Args:
             start_epoch: Epoch to start from (for resuming).
         """
         for epoch in range(start_epoch, self.epochs):
             logger.info(f"Start epoch : {epoch + 1}")
+
             # Training
             train_loss = train_one_epoch(
                 self.model,
@@ -78,6 +84,9 @@ class Trainer:
                 gradient_clip_norm=ModelConfig.GRADIENT_CLIP_NORM,
             )
 
+            # Aggressive cleanup after training before validation
+            self._cleanup_memory()
+
             # Validation
             val_loss = validate_one_epoch(
                 self.model,
@@ -85,6 +94,9 @@ class Trainer:
                 self.criterion,
                 self.device,
             )
+
+            # Aggressive cleanup after validation
+            self._cleanup_memory()
 
             # Log metrics
             self.tb_logger.log_training_loss(train_loss, epoch)
@@ -114,7 +126,12 @@ class Trainer:
             if self.early_stopping(val_loss):
                 break
 
-            # Clean up memory between epochs
+            # Extra cleanup between epochs
             self._cleanup_memory()
+
+        # Clean up loaders to free file mappings
+        del self.train_loader
+        del self.val_loader
+        self._cleanup_memory()
 
         self.tb_logger.close()
