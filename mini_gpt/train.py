@@ -23,6 +23,8 @@ from common.training.tensorboard_logger import (
     TensorBoardLogger,
 )
 
+from common.utils.logger import logger
+
 from mini_gpt.config import GPTConfig
 from common.data.vocabulary import Vocabulary
 from common.configs.model_config import ModelConfig
@@ -101,7 +103,7 @@ def main():
         early_stopping.load_state_dict(
             latest_checkpoint.get("early_stopping_state", early_stopping.state_dict())
         )
-        print(f"Resumed from epoch {start_epoch}")
+        logger.info(f"Resumed from epoch {start_epoch}")
 
     for epoch in range(start_epoch, GPTConfig.EPOCHS):
         # Training
@@ -129,7 +131,7 @@ def main():
         current_lr = optimizer.param_groups[0]["lr"]
         tb_logger.log_learning_rate(current_lr, epoch)
 
-        print(
+        logger.info(
             f"Epoch {epoch+1}/{GPTConfig.EPOCHS} | "
             f"Train Loss: {train_loss:.4f} | "
             f"Val Loss: {val_loss:.4f}"
@@ -151,11 +153,11 @@ def main():
 
         # Early stopping check
         if early_stopping(val_loss):
-            print(f"Early stopping at epoch {epoch+1}")
+            logger.info(f"Early stopping at epoch {epoch+1}")
             break
 
     tb_logger.close()
-    print("Training complete!")
+    logger.info("Training complete!")
 
 
 if __name__ == "__main__":
