@@ -34,7 +34,6 @@ from mini_gpt.trainer import Trainer
 
 def build_trainer() -> Trainer:
 
-    # Load datasets - use lazy loading
     train_dataset = TextDataset(
         Path("common/data/processed/train.bin"),
         ModelConfig.BLOCK_SIZE,
@@ -45,36 +44,36 @@ def build_trainer() -> Trainer:
         ModelConfig.BLOCK_SIZE,
     )
 
-    steps_per_epoch = len(train_dataset)
-
     train_sampler = RandomSampler(
         train_dataset,
         replacement=True,
-        num_samples=steps_per_epoch * ModelConfig.BATCH_SIZE,
+        num_samples=ModelConfig.STEPS_PER_EPOCH * ModelConfig.BATCH_SIZE,
     )
 
-    # ULTRA LOW MEMORY DataLoader configuration
-    # num_workers=0: CRITICAL - each worker maps the entire file into memory
-    # persistent_workers=False: Don't keep workers alive
-    # prefetch_factor=None: No prefetching with single process
     train_loader = DataLoader(
         train_dataset,
         batch_size=ModelConfig.BATCH_SIZE,
         sampler=train_sampler,
-        pin_memory=False,  # Disable for CPU/low-memory GPU
-        num_workers=0,  # CRITICAL: Single process to avoid multiple file mappings
+        pin_memory=ModelConfig.PIN_MEMORY and torch.cuda.is_available(),
+        num_workers=0,
         prefetch_factor=None,
         persistent_workers=False,
         drop_last=True,
-        multiprocessing_context=None,  # Use fork instead of spawn
+        multiprocessing_context=None,
+    )
+
+    val_sampler = RandomSampler(
+        val_dataset,
+        replacement=True,
+        num_samples=ModelConfig.VAL_STEPS * ModelConfig.BATCH_SIZE,
     )
 
     val_loader = DataLoader(
         val_dataset,
         batch_size=ModelConfig.BATCH_SIZE,
-        shuffle=False,
-        pin_memory=False,
-        num_workers=0,  # CRITICAL: Single process
+        sampler=val_sampler,
+        pin_memory=ModelConfig.PIN_MEMORY and torch.cuda.is_available(),
+        num_workers=0,
         prefetch_factor=None,
         persistent_workers=False,
         drop_last=True,
@@ -95,7 +94,6 @@ def build_trainer() -> Trainer:
 
     model.to(ModelConfig.DEVICE)
 
-    # Enable gradient checkpointing if configured
     if ModelConfig.USE_GRADIENT_CHECKPOINTING:
         model.gradient_checkpointing_enable()
         logger.info("Gradient checkpointing enabled")
@@ -107,7 +105,6 @@ def build_trainer() -> Trainer:
 
     criterion = LanguageModelLoss()
 
-    # Initialize checkpoint manager
     checkpoint_manager = CheckpointManager(
         checkpoint_dir=ModelConfig.CHECKPOINT_DIR,
         model=model,
@@ -115,14 +112,12 @@ def build_trainer() -> Trainer:
         keep_last_n=ModelConfig.KEEP_LAST_N_CHECKPOINTS,
     )
 
-    # Initialize early stopping
     early_stopping = EarlyStopping(
         patience=ModelConfig.EARLY_STOPPING_PATIENCE,
         min_delta=ModelConfig.EARLY_STOPPING_MIN_DELTA,
         mode="min",
     )
 
-    # Initialize TensorBoard logger
     tb_logger = TensorBoardLogger(ModelConfig.TENSORBOARD_LOG_DIR)
 
     return Trainer(
@@ -140,30 +135,29 @@ def build_trainer() -> Trainer:
 
 
 def main():
-    # Log memory optimization settings
     logger.info("=" * 60)
-    logger.info("ULTRA LOW-MEMORY Training Configuration")
+    logger.info("Training Configuration")
     logger.info("=" * 60)
     logger.info(f"Device: {ModelConfig.DEVICE}")
     logger.info(f"Batch Size: {ModelConfig.BATCH_SIZE}")
+    logger.info(f"Steps Per Epoch: {ModelConfig.STEPS_PER_EPOCH}")
+    logger.info(f"Validation Steps: {ModelConfig.VAL_STEPS}")
     logger.info(f"Gradient Accumulation Steps: {ModelConfig.GRADIENT_ACCUMULATION_STEPS}")
     logger.info(f"Effective Batch Size: {ModelConfig.BATCH_SIZE * ModelConfig.GRADIENT_ACCUMULATION_STEPS}")
     logger.info(f"Mixed Precision: {ModelConfig.USE_MIXED_PRECISION}")
     logger.info(f"Gradient Checkpointing: {ModelConfig.USE_GRADIENT_CHECKPOINTING}")
     logger.info(f"Gradient Clip Norm: {ModelConfig.GRADIENT_CLIP_NORM}")
     logger.info(f"DataLoader Workers: 0 (single process)")
-    logger.info(f"Pin Memory: False")
+    logger.info(f"Pin Memory: {ModelConfig.PIN_MEMORY}")
     logger.info(f"Persistent Workers: False")
     logger.info("=" * 60)
 
-    # Monitor memory before starting
     if torch.cuda.is_available():
         torch.cuda.reset_peak_memory_stats()
         logger.info(f"Initial GPU memory allocated: {torch.cuda.memory_allocated() / 1024**2:.1f} MB")
 
     trainer = build_trainer()
 
-    # Try to resume from latest checkpoint
     start_epoch = 0
     latest_checkpoint = trainer.checkpoint_manager.load_latest()
     if latest_checkpoint is not None:
@@ -191,7 +185,6 @@ def main():
             logger.error("  7. Close other applications")
         raise
     finally:
-        # Final memory cleanup
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
         gc.collect()
