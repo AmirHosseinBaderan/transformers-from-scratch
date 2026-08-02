@@ -53,7 +53,7 @@ def train_one_epoch(
 
         # Mixed precision forward pass
         if use_mixed_precision:
-            with autocast():
+            with torch.amp.autocast():
                 logits = model(x)
                 loss = criterion(logits, y)
                 # Scale loss for gradient accumulation
