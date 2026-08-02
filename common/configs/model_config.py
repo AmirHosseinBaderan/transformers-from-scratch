@@ -117,7 +117,7 @@ def _get_optimal_config() -> dict:
             })
         else:
             config.update({
-                "BATCH_SIZE": 8,
+                "BATCH_SIZE": 32,
                 "GRADIENT_ACCUMULATION_STEPS": 4,
                 "USE_MIXED_PRECISION": False,
                 "USE_GRADIENT_CHECKPOINTING": True,
@@ -180,3 +180,6 @@ class ModelConfig:
 
     # TensorBoard settings
     TENSORBOARD_LOG_DIR = "mini_gpt/runs"
+
+    STEPS_PER_EPOCH = 2000
+    VAL_STEPS = 200
