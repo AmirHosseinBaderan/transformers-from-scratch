@@ -1,5 +1,6 @@
 from tqdm import tqdm
 
+import gc
 import torch
 
 
@@ -10,7 +11,7 @@ def validate_one_epoch(
     device,
 ):
     """
-    Run one epoch of validation.
+    Run one epoch of validation with ultra low-memory optimizations.
 
     Args:
         model: The model to validate.
@@ -33,7 +34,7 @@ def validate_one_epoch(
     )
 
     with torch.no_grad():
-        for x, y in progress_bar:
+        for batch_idx, (x, y) in enumerate(progress_bar):
             x = x.to(device, non_blocking=True)
             y = y.to(device, non_blocking=True)
 
@@ -45,5 +46,17 @@ def validate_one_epoch(
             progress_bar.set_postfix(
                 loss=f"{total_loss / num_batches:.4f}"
             )
+
+            # AGGRESSIVE MEMORY CLEANUP after each batch
+            del x, y, logits, loss
+
+            # Periodic CUDA cache cleanup every 50 batches
+            if torch.cuda.is_available() and (batch_idx + 1) % 50 == 0:
+                torch.cuda.empty_cache()
+
+    # Final cleanup
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
 
     return total_loss / num_batches
