@@ -34,8 +34,8 @@ def validate_one_epoch(
 
     with torch.no_grad():
         for x, y in progress_bar:
-            x = x.to(device)
-            y = y.to(device)
+            x = x.to(device, non_blocking=True)
+            y = y.to(device, non_blocking=True)
 
             logits, loss = model(x, y)
 
