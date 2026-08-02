@@ -54,12 +54,12 @@ def train_one_epoch(
         # Mixed precision forward pass
         if use_mixed_precision:
             with autocast():
-                logits = model(x)
+                logits, _ = model(x)
                 loss = criterion(logits, y)
                 # Scale loss for gradient accumulation
                 loss = loss / gradient_accumulation_steps
         else:
-            logits = model(x)
+            logits, _ = model(x)
             loss = criterion(logits, y)
             # Scale loss for gradient accumulation
             loss = loss / gradient_accumulation_steps

@@ -2,7 +2,7 @@ from pathlib import Path
 
 import gc
 import torch
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, RandomSampler
 
 from mini_gpt.model import MiniGPT
 
@@ -33,6 +33,7 @@ from mini_gpt.trainer import Trainer
 
 
 def build_trainer() -> Trainer:
+
     # Load datasets - use lazy loading
     train_dataset = TextDataset(
         Path("common/data/processed/train.bin"),
@@ -44,6 +45,14 @@ def build_trainer() -> Trainer:
         ModelConfig.BLOCK_SIZE,
     )
 
+    steps_per_epoch = len(train_dataset)
+
+    train_sampler = RandomSampler(
+        train_dataset,
+        replacement=True,
+        num_samples=steps_per_epoch * ModelConfig.BATCH_SIZE,
+    )
+
     # ULTRA LOW MEMORY DataLoader configuration
     # num_workers=0: CRITICAL - each worker maps the entire file into memory
     # persistent_workers=False: Don't keep workers alive
@@ -51,13 +60,12 @@ def build_trainer() -> Trainer:
     train_loader = DataLoader(
         train_dataset,
         batch_size=ModelConfig.BATCH_SIZE,
-        shuffle=True,
+        sampler=train_sampler,
         pin_memory=False,  # Disable for CPU/low-memory GPU
         num_workers=0,  # CRITICAL: Single process to avoid multiple file mappings
         prefetch_factor=None,
         persistent_workers=False,
         drop_last=True,
-        # Reduce memory fragmentation
         multiprocessing_context=None,  # Use fork instead of spawn
     )
 
