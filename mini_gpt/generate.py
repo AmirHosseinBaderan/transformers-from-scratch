@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import torch
 
 from common.configs.model_config import ModelConfig
@@ -10,6 +12,7 @@ from common.data.character_tokenizer import CharacterTokenizer
 
 from common.utils.logger import logger
 
+from mini_gpt.config import GPTConfig
 from mini_gpt.model import MiniGPT
 
 
@@ -63,8 +66,12 @@ def main():
     )
 
 
+    best_model_path = Path(
+        GPTConfig.CHECKPOINT_DIR
+    ) / "best_model.pt"
+
     model = load_model(
-        checkpoint_path="checkpoints/best.pt",
+        checkpoint_path=best_model_path,
         device=device,
         vocabulary_size=len(vocabulary),
     )
