@@ -11,6 +11,8 @@ from common.data.character_tokenizer import CharacterTokenizer
 from common.data.readers.csv_reader import CSVReader
 from common.data.preprocessing.dataset_preparer import DatasetPreparer
 
+from common.utils.logger import logger
+
 
 RAW_DATA_DIR = Path(
     "common/data/raw"
@@ -45,14 +47,14 @@ def count_csv_rows(path: Path) -> int:
 
 def main():
 
-    print("Creating dataset preparer...")
+    logger.info("Creating dataset preparer...")
 
     preparer = DatasetPreparer(
         CharacterVocabularyBuilder()
     )
 
 
-    print("Building vocabulary...")
+    logger.info("Building vocabulary...")
 
     train_reader = CSVReader(
         TRAIN_FILE
@@ -70,8 +72,8 @@ def main():
     )
 
 
-    print(
-        "Vocabulary size:",
+    logger.info(
+        "Vocabulary size: %s",
         len(vocabulary)
     )
 
@@ -81,7 +83,7 @@ def main():
     )
 
 
-    print("Encoding train dataset...")
+    logger.info("Encoding train dataset...")
 
     train_reader = CSVReader(
         TRAIN_FILE
@@ -98,7 +100,7 @@ def main():
     )
 
 
-    print("Encoding validation dataset...")
+    logger.info("Encoding validation dataset...")
 
     validation_reader = CSVReader(
         VALIDATION_FILE
@@ -117,23 +119,17 @@ def main():
     )
 
 
-    print("Dataset preparation completed.")
+    logger.info("Dataset preparation completed.")
 
-    print()
+    logger.info("")
 
-    print("Generated files:")
+    logger.info("Generated files:")
 
-    print(
-        VOCAB_FILE
-    )
+    logger.info("%s", VOCAB_FILE)
 
-    print(
-        TRAIN_BIN
-    )
+    logger.info("%s", TRAIN_BIN)
 
-    print(
-        VALIDATION_BIN
-    )
+    logger.info("%s", VALIDATION_BIN)
 
 
 if __name__ == "__main__":

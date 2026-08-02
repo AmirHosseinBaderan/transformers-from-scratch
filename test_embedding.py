@@ -2,6 +2,8 @@ import torch
 
 from common.nn.layers.input_embedding import InputEmbedding
 
+from common.utils.logger import logger
+
 
 model = InputEmbedding(
     vocab_size=500,
@@ -19,4 +21,5 @@ x = torch.randint(
 
 out = model(x)
 
-print(out.shape)
+
+logger.info("Output shape: %s", out.shape)

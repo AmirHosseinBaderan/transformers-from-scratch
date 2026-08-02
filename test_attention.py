@@ -2,6 +2,8 @@ import torch
 
 from common.nn.layers.multi_head_attention import MultiHeadAttention
 
+from common.utils.logger import logger
+
 
 model = MultiHeadAttention(
     embedding_dim=128,
@@ -18,4 +20,5 @@ x = torch.randn(
 
 y = model(x)
 
-print(y.shape)
+
+logger.info("Output shape: %s", y.shape)

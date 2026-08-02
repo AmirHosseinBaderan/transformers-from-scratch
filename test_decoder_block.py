@@ -2,6 +2,8 @@ import torch
 
 from common.nn.blocks.decoder_block import DecoderBlock
 
+from common.utils.logger import logger
+
 
 block = DecoderBlock(
     embedding_dim=128,
@@ -19,4 +21,4 @@ x = torch.randn(
 y = block(x)
 
 
-print(y.shape)
+logger.info("Output shape: %s", y.shape)

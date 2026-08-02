@@ -9,48 +9,50 @@ Runs the full pipeline in order:
 import subprocess
 import sys
 
+from common.utils.logger import logger
+
 
 def run_data_pipeline():
     """Step 1: Run the data pipeline to build vocabulary and encode datasets."""
-    print("=" * 60)
-    print("STEP 1: Running data pipeline")
-    print("=" * 60)
+    logger.info("=" * 60)
+    logger.info("STEP 1: Running data pipeline")
+    logger.info("=" * 60)
 
     result = subprocess.run(
         [sys.executable, "data_pipeline.py"],
     )
 
     if result.returncode != 0:
-        print("Data pipeline failed with return code", result.returncode)
+        logger.error("Data pipeline failed with return code %s", result.returncode)
         sys.exit(result.returncode)
 
-    print("Data pipeline completed successfully.\n")
+    logger.info("Data pipeline completed successfully.")
 
 
 def run_training():
     """Step 2: Train the MiniGPT model."""
-    print("=" * 60)
-    print("STEP 2: Running training")
-    print("=" * 60)
+    logger.info("=" * 60)
+    logger.info("STEP 2: Running training")
+    logger.info("=" * 60)
 
     result = subprocess.run(
         [sys.executable, "-m", "mini_gpt.train"],
     )
 
     if result.returncode != 0:
-        print("Training failed with return code", result.returncode)
+        logger.error("Training failed with return code %s", result.returncode)
         sys.exit(result.returncode)
 
-    print("Training completed successfully.\n")
+    logger.info("Training completed successfully.")
 
 
 def main():
     run_data_pipeline()
     run_training()
 
-    print("=" * 60)
-    print("Pipeline finished successfully!")
-    print("=" * 60)
+    logger.info("=" * 60)
+    logger.info("Pipeline finished successfully!")
+    logger.info("=" * 60)
 
 
 if __name__ == "__main__":

@@ -11,6 +11,8 @@ from common.data.preprocessing.dataset_preparer import (
     DatasetPreparer,
 )
 
+from common.utils.logger import logger
+
 
 RAW = Path("common/data/raw")
 OUTPUT = Path("common/data/processed")
@@ -27,7 +29,7 @@ def main():
     )
 
 
-    print("Building vocabulary...")
+    logger.info("Building vocabulary...")
 
 
     vocabulary = preparer.prepare_vocabulary(
@@ -41,7 +43,7 @@ def main():
     )
 
 
-    print("Encoding train...")
+    logger.info("Encoding train...")
 
 
     preparer.encode_to_file(
@@ -51,7 +53,7 @@ def main():
     )
 
 
-    print("Encoding validation...")
+    logger.info("Encoding validation...")
 
 
     preparer.encode_to_file(
@@ -61,9 +63,9 @@ def main():
     )
 
 
-    print("Done")
-    print(
-        "Vocabulary size:",
+    logger.info("Done")
+    logger.info(
+        "Vocabulary size: %s",
         len(vocabulary)
     )
 

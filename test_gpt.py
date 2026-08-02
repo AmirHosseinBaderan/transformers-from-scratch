@@ -4,12 +4,14 @@ from common.configs.model_config import ModelConfig
 from mini_gpt.model import MiniGPT
 from common.data.vocabulary import Vocabulary
 
+from common.utils.logger import logger
+
 
 vocabulary = Vocabulary.load(
     ModelConfig.VOCAB_PATH
 )
-print(
-    "Vocabulary size:",
+logger.info(
+    "Vocabulary size: %s",
     vocabulary.size
 )
 
@@ -32,4 +34,4 @@ x = torch.randint(
 logits = model(x)
 
 
-print(logits.shape)
+logger.info("Logits shape: %s", logits.shape)
