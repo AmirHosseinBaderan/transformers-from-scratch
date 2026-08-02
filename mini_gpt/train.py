@@ -29,11 +29,10 @@ from mini_gpt.config import GPTConfig
 from common.data.vocabulary import Vocabulary
 from common.configs.model_config import ModelConfig
 
-from mini_gpt.train_one_epoch import train_one_epoch
-from mini_gpt.validate_one_epoch import validate_one_epoch
+from mini_gpt.trainer import Trainer
 
 
-def main():
+def build_trainer() -> Trainer:
     # Load datasets
     train_dataset = TextDataset(
         Path("common/data/processed/train.bin"),
@@ -95,68 +94,37 @@ def main():
     # Initialize TensorBoard logger
     tb_logger = TensorBoardLogger(GPTConfig.TENSORBOARD_LOG_DIR)
 
+    return Trainer(
+        model=model,
+        optimizer=optimizer,
+        criterion=criterion,
+        train_loader=train_loader,
+        val_loader=val_loader,
+        device=GPTConfig.DEVICE,
+        checkpoint_manager=checkpoint_manager,
+        early_stopping=early_stopping,
+        tb_logger=tb_logger,
+        epochs=GPTConfig.EPOCHS,
+    )
+
+
+def main():
+    trainer = build_trainer()
+
     # Try to resume from latest checkpoint
     start_epoch = 0
-    latest_checkpoint = checkpoint_manager.load_latest()
+    latest_checkpoint = trainer.checkpoint_manager.load_latest()
     if latest_checkpoint is not None:
         start_epoch = latest_checkpoint["epoch"]
-        early_stopping.load_state_dict(
-            latest_checkpoint.get("early_stopping_state", early_stopping.state_dict())
+        trainer.early_stopping.load_state_dict(
+            latest_checkpoint.get(
+                "early_stopping_state",
+                trainer.early_stopping.state_dict(),
+            )
         )
         logger.info(f"Resumed from epoch {start_epoch}")
 
-    for epoch in range(start_epoch, GPTConfig.EPOCHS):
-        # Training
-        train_loss = train_one_epoch(
-            model,
-            train_loader,
-            criterion,
-            optimizer,
-            GPTConfig.DEVICE,
-        )
-
-        # Validation
-        val_loss = validate_one_epoch(
-            model,
-            val_loader,
-            criterion,
-            GPTConfig.DEVICE,
-        )
-
-        # Log metrics
-        tb_logger.log_training_loss(train_loss, epoch)
-        tb_logger.log_validation_loss(val_loss, epoch)
-
-        # Log learning rate
-        current_lr = optimizer.param_groups[0]["lr"]
-        tb_logger.log_learning_rate(current_lr, epoch)
-
-        logger.info(
-            f"Epoch {epoch+1}/{GPTConfig.EPOCHS} | "
-            f"Train Loss: {train_loss:.4f} | "
-            f"Val Loss: {val_loss:.4f}"
-        )
-
-        # Check if this is the best model
-        is_best = val_loss < checkpoint_manager.best_val_loss
-
-        # Sync early stopping state to checkpoint manager
-        checkpoint_manager.early_stopping_state = early_stopping.state_dict()
-
-        # Save checkpoint
-        checkpoint_manager.save(
-            epoch=epoch + 1,
-            train_loss=train_loss,
-            val_loss=val_loss,
-            is_best=is_best,
-        )
-
-        # Early stopping check
-        if early_stopping(val_loss):
-            logger.info(f"Early stopping at epoch {epoch+1}")
-            break
-
-    tb_logger.close()
+    trainer.train(start_epoch=start_epoch)
     logger.info("Training complete!")
 
 
