@@ -16,7 +16,7 @@ def train_one_epoch(
     gradient_clip_norm: float | None = None,
 ):
     """
-    Run one epoch of training with memory optimizations.
+    Run one epoch of training with ultra low-memory optimizations.
 
     Args:
         model: The model to train.
@@ -53,7 +53,7 @@ def train_one_epoch(
 
         # Mixed precision forward pass
         if use_mixed_precision:
-            with torch.amp.autocast():
+            with autocast():
                 logits = model(x)
                 loss = criterion(logits, y)
                 # Scale loss for gradient accumulation
@@ -100,6 +100,14 @@ def train_one_epoch(
             loss=f"{total_loss / num_batches:.4f}"
         )
 
+        # AGGRESSIVE MEMORY CLEANUP after each batch
+        # Delete tensors to free memory immediately
+        del x, y, logits, loss
+
+        # Periodic CUDA cache cleanup every 50 batches
+        if torch.cuda.is_available() and (batch_idx + 1) % 50 == 0:
+            torch.cuda.empty_cache()
+
     # Handle remaining gradients if batch count is not divisible by accumulation steps
     if num_batches % gradient_accumulation_steps != 0:
         if use_mixed_precision:
@@ -118,5 +126,10 @@ def train_one_epoch(
             optimizer.step()
 
         optimizer.zero_grad()
+
+    # Final cleanup
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
 
     return total_loss / num_batches
