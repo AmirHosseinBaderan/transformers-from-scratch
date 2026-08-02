@@ -30,17 +30,6 @@ class TextDataset(Dataset):
 
         self._block_size = block_size
 
-        # Pre-allocate buffers for efficient tensor creation
-        # This avoids creating new numpy arrays on every __getitem__ call
-        self._x_buffer = np.empty(
-            block_size,
-            dtype=np.int64,
-        )
-        self._y_buffer = np.empty(
-            block_size,
-            dtype=np.int64,
-        )
-
         if len(self._tokens) <= block_size:
             raise ValueError(
                 "Dataset is smaller than block size"
@@ -57,15 +46,15 @@ class TextDataset(Dataset):
             index: int,
     ) -> tuple[Tensor, Tensor]:
 
-        # Copy data into pre-allocated buffers (avoids new allocation)
-        self._x_buffer[:] = self._tokens[index:index + self._block_size]
-        self._y_buffer[:] = self._tokens[index + 1:index + self._block_size + 1]
-
-        # Use from_numpy to create tensors that share memory (zero-copy)
-        x_tensor = torch.from_numpy(self._x_buffer.copy())
-        y_tensor = torch.from_numpy(self._y_buffer.copy())
-
-        return (
-            x_tensor,
-            y_tensor,
+        # Slice memmap and convert directly to tensors
+        # torch.tensor creates a copy, which is necessary since memmap is shared
+        x = torch.tensor(
+            self._tokens[index:index + self._block_size],
+            dtype=torch.long,
         )
+        y = torch.tensor(
+            self._tokens[index + 1:index + self._block_size + 1],
+            dtype=torch.long,
+        )
+
+        return x, y

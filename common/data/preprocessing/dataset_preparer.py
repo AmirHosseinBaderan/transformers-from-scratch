@@ -53,8 +53,8 @@ class DatasetPreparer:
             exist_ok=True,
         )
 
-        # unsigned int (32-bit)
-        buffer = array("I")
+        # unsigned short (16-bit) to match np.uint16 in TextDataset
+        buffer = array("H")
 
         with output_path.open("wb") as file:
 
