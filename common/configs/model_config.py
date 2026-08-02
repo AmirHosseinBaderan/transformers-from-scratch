@@ -12,14 +12,10 @@ def _get_gpu_memory_gb() -> float | None:
         return None
 
     try:
-        # Get total and allocated memory
         total_memory = torch.cuda.get_device_properties(0).total_memory
         reserved_memory = torch.cuda.memory_reserved(0)
-
-        # Available memory = total - reserved (reserved includes allocated + cache)
         available_memory = total_memory - reserved_memory
-
-        return available_memory / (1024 ** 3)  # Convert to GB
+        return available_memory / (1024 ** 3)
     except Exception:
         return None
 
@@ -32,111 +28,102 @@ def _get_cpu_memory_gb() -> float:
         import psutil
         return psutil.virtual_memory().available / (1024 ** 3)
     except ImportError:
-        # Fallback: assume 8GB if psutil not available
         return 8.0
 
 
 def _get_optimal_config() -> dict:
     """
     Determine optimal configuration based on available hardware.
+    ULTRA LOW MEMORY defaults for small memory systems.
     """
     config = {}
 
-    # Check if CUDA is available
     is_cuda = torch.cuda.is_available()
 
     if is_cuda:
-        # GPU configuration
         gpu_memory_gb = _get_gpu_memory_gb()
         config["DEVICE"] = "cuda"
 
         if gpu_memory_gb is not None and gpu_memory_gb < 2.0:
-            # Very small GPU (< 2GB)
+            config.update({
+                "BATCH_SIZE": 2,
+                "GRADIENT_ACCUMULATION_STEPS": 16,
+                "USE_MIXED_PRECISION": True,
+                "USE_GRADIENT_CHECKPOINTING": True,
+                "GRADIENT_CLIP_NORM": 1.0,
+                "NUM_WORKERS": 0,
+                "PREFETCH_FACTOR": None,
+                "PIN_MEMORY": False,
+            })
+        elif gpu_memory_gb is not None and gpu_memory_gb < 4.0:
             config.update({
                 "BATCH_SIZE": 4,
                 "GRADIENT_ACCUMULATION_STEPS": 8,
                 "USE_MIXED_PRECISION": True,
                 "USE_GRADIENT_CHECKPOINTING": True,
                 "GRADIENT_CLIP_NORM": 1.0,
-                "NUM_WORKERS": 1,
-                "PREFETCH_FACTOR": 1,
-                "PIN_MEMORY": True,
+                "NUM_WORKERS": 0,
+                "PREFETCH_FACTOR": None,
+                "PIN_MEMORY": False,
             })
-        elif gpu_memory_gb is not None and gpu_memory_gb < 4.0:
-            # Small GPU (2-4GB)
+        elif gpu_memory_gb is not None and gpu_memory_gb < 8.0:
             config.update({
                 "BATCH_SIZE": 8,
                 "GRADIENT_ACCUMULATION_STEPS": 4,
                 "USE_MIXED_PRECISION": True,
                 "USE_GRADIENT_CHECKPOINTING": True,
                 "GRADIENT_CLIP_NORM": 1.0,
-                "NUM_WORKERS": 2,
-                "PREFETCH_FACTOR": 2,
-                "PIN_MEMORY": True,
+                "NUM_WORKERS": 0,
+                "PREFETCH_FACTOR": None,
+                "PIN_MEMORY": False,
             })
-        elif gpu_memory_gb is not None and gpu_memory_gb < 8.0:
-            # Medium GPU (4-8GB)
+        else:
             config.update({
                 "BATCH_SIZE": 16,
                 "GRADIENT_ACCUMULATION_STEPS": 2,
                 "USE_MIXED_PRECISION": True,
-                "USE_GRADIENT_CHECKPOINTING": True,
-                "GRADIENT_CLIP_NORM": 1.0,
-                "NUM_WORKERS": 2,
-                "PREFETCH_FACTOR": 2,
-                "PIN_MEMORY": True,
-            })
-        else:
-            # Large GPU (8GB+)
-            config.update({
-                "BATCH_SIZE": 32,
-                "GRADIENT_ACCUMULATION_STEPS": 1,
-                "USE_MIXED_PRECISION": True,
                 "USE_GRADIENT_CHECKPOINTING": False,
                 "GRADIENT_CLIP_NORM": 1.0,
-                "NUM_WORKERS": 4,
-                "PREFETCH_FACTOR": 4,
+                "NUM_WORKERS": 0,
+                "PREFETCH_FACTOR": None,
                 "PIN_MEMORY": True,
             })
     else:
-        # CPU configuration
+        # CPU configuration - always ultra low memory
         cpu_memory_gb = _get_cpu_memory_gb()
         config["DEVICE"] = "cpu"
 
         if cpu_memory_gb < 4.0:
-            # Very small RAM (< 4GB)
             config.update({
                 "BATCH_SIZE": 2,
                 "GRADIENT_ACCUMULATION_STEPS": 16,
-                "USE_MIXED_PRECISION": False,  # Not supported on CPU
+                "USE_MIXED_PRECISION": False,
                 "USE_GRADIENT_CHECKPOINTING": True,
                 "GRADIENT_CLIP_NORM": 1.0,
-                "NUM_WORKERS": 0,  # No multiprocessing on limited RAM
+                "NUM_WORKERS": 0,
                 "PREFETCH_FACTOR": None,
                 "PIN_MEMORY": False,
             })
         elif cpu_memory_gb < 8.0:
-            # Small RAM (4-8GB)
             config.update({
                 "BATCH_SIZE": 4,
                 "GRADIENT_ACCUMULATION_STEPS": 8,
                 "USE_MIXED_PRECISION": False,
                 "USE_GRADIENT_CHECKPOINTING": True,
                 "GRADIENT_CLIP_NORM": 1.0,
-                "NUM_WORKERS": 1,
-                "PREFETCH_FACTOR": 1,
+                "NUM_WORKERS": 0,
+                "PREFETCH_FACTOR": None,
                 "PIN_MEMORY": False,
             })
         else:
-            # Medium+ RAM (8GB+)
             config.update({
                 "BATCH_SIZE": 8,
                 "GRADIENT_ACCUMULATION_STEPS": 4,
                 "USE_MIXED_PRECISION": False,
                 "USE_GRADIENT_CHECKPOINTING": True,
                 "GRADIENT_CLIP_NORM": 1.0,
-                "NUM_WORKERS": 2,
-                "PREFETCH_FACTOR": 2,
+                "NUM_WORKERS": 0,
+                "PREFETCH_FACTOR": None,
                 "PIN_MEMORY": False,
             })
 
