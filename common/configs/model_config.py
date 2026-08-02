@@ -46,7 +46,7 @@ def _get_optimal_config() -> dict:
 
         if gpu_memory_gb is not None and gpu_memory_gb < 2.0:
             config.update({
-                "BATCH_SIZE": 2,
+                "BATCH_SIZE": 32,
                 "GRADIENT_ACCUMULATION_STEPS": 16,
                 "USE_MIXED_PRECISION": True,
                 "USE_GRADIENT_CHECKPOINTING": True,
@@ -57,7 +57,7 @@ def _get_optimal_config() -> dict:
             })
         elif gpu_memory_gb is not None and gpu_memory_gb < 4.0:
             config.update({
-                "BATCH_SIZE": 4,
+                "BATCH_SIZE": 32,
                 "GRADIENT_ACCUMULATION_STEPS": 8,
                 "USE_MIXED_PRECISION": True,
                 "USE_GRADIENT_CHECKPOINTING": True,
@@ -68,7 +68,7 @@ def _get_optimal_config() -> dict:
             })
         elif gpu_memory_gb is not None and gpu_memory_gb < 8.0:
             config.update({
-                "BATCH_SIZE": 8,
+                "BATCH_SIZE": 32,
                 "GRADIENT_ACCUMULATION_STEPS": 4,
                 "USE_MIXED_PRECISION": True,
                 "USE_GRADIENT_CHECKPOINTING": True,
@@ -79,7 +79,7 @@ def _get_optimal_config() -> dict:
             })
         else:
             config.update({
-                "BATCH_SIZE": 16,
+                "BATCH_SIZE": 32,
                 "GRADIENT_ACCUMULATION_STEPS": 2,
                 "USE_MIXED_PRECISION": True,
                 "USE_GRADIENT_CHECKPOINTING": False,
@@ -95,7 +95,7 @@ def _get_optimal_config() -> dict:
 
         if cpu_memory_gb < 4.0:
             config.update({
-                "BATCH_SIZE": 2,
+                "BATCH_SIZE": 32,
                 "GRADIENT_ACCUMULATION_STEPS": 16,
                 "USE_MIXED_PRECISION": False,
                 "USE_GRADIENT_CHECKPOINTING": True,
@@ -106,7 +106,7 @@ def _get_optimal_config() -> dict:
             })
         elif cpu_memory_gb < 8.0:
             config.update({
-                "BATCH_SIZE": 4,
+                "BATCH_SIZE": 32,
                 "GRADIENT_ACCUMULATION_STEPS": 8,
                 "USE_MIXED_PRECISION": False,
                 "USE_GRADIENT_CHECKPOINTING": True,
@@ -181,5 +181,5 @@ class ModelConfig:
     # TensorBoard settings
     TENSORBOARD_LOG_DIR = "mini_gpt/runs"
 
-    STEPS_PER_EPOCH = 2000
+    STEPS_PER_EPOCH = 5000
     VAL_STEPS = 200

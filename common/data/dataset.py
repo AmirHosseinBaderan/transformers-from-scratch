@@ -2,24 +2,20 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from typing import TYPE_CHECKING
-
 import numpy as np
 import torch
 
 from torch import Tensor
 from torch.utils.data import Dataset
 
-if TYPE_CHECKING:
-    pass
-
 
 class TextDataset(Dataset):
 
     def __init__(
-            self,
-            path: Path,
-            block_size: int,
+        self,
+        path: Path,
+        block_size: int,
+        stride: int | None = None,
     ):
 
         self._tokens = np.memmap(
@@ -30,6 +26,12 @@ class TextDataset(Dataset):
 
         self._block_size = block_size
 
+        self._stride = (
+            stride
+            if stride is not None
+            else block_size
+        )
+
         if len(self._tokens) <= block_size:
             raise ValueError(
                 "Dataset is smaller than block size"
@@ -38,22 +40,31 @@ class TextDataset(Dataset):
 
     def __len__(self):
 
-        return len(self._tokens) - self._block_size
+        return (
+            len(self._tokens) - self._block_size
+        ) // self._stride
 
 
     def __getitem__(
-            self,
-            index: int,
+        self,
+        index: int,
     ) -> tuple[Tensor, Tensor]:
 
-        # Slice memmap and convert directly to tensors
-        # torch.tensor creates a copy, which is necessary since memmap is shared
+        start = index * self._stride
+
         x = torch.tensor(
-            self._tokens[index:index + self._block_size],
+            self._tokens[
+                start:
+                start + self._block_size
+            ],
             dtype=torch.long,
         )
+
         y = torch.tensor(
-            self._tokens[index + 1:index + self._block_size + 1],
+            self._tokens[
+                start + 1:
+                start + self._block_size + 1
+            ],
             dtype=torch.long,
         )
 
