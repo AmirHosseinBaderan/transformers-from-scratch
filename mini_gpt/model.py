@@ -19,12 +19,14 @@ class MiniGPT(nn.Module):
         num_heads: int,
         num_layers: int,
         dropout: float = 0.1,
+        use_gradient_checkpointing: bool = False,
     ):
         super().__init__()
 
         self.vocab_size = vocab_size
         self.block_size = block_size
         self.embedding_dim = embedding_dim
+        self._use_gradient_checkpointing = use_gradient_checkpointing
 
         self.embedding = InputEmbedding(
             vocab_size=vocab_size,
@@ -38,6 +40,7 @@ class MiniGPT(nn.Module):
                     embedding_dim=embedding_dim,
                     num_heads=num_heads,
                     dropout=dropout,
+                    use_gradient_checkpointing=use_gradient_checkpointing,
                 )
                 for _ in range(num_layers)
             ]
@@ -78,6 +81,23 @@ class MiniGPT(nn.Module):
                 mean=0.0,
                 std=0.02,
             )
+
+    def gradient_checkpointing_enable(self) -> None:
+        """
+        Enable gradient checkpointing for all decoder blocks.
+        This trades compute for memory by recomputing activations during backward pass.
+        """
+        self._use_gradient_checkpointing = True
+        for block in self.blocks:
+            block.use_gradient_checkpointing = True
+
+    def gradient_checkpointing_disable(self) -> None:
+        """
+        Disable gradient checkpointing for all decoder blocks.
+        """
+        self._use_gradient_checkpointing = False
+        for block in self.blocks:
+            block.use_gradient_checkpointing = False
 
     def forward(
         self,
