@@ -12,7 +12,6 @@ from common.data.character_tokenizer import CharacterTokenizer
 
 from common.utils.logger import logger
 
-from mini_gpt.config import GPTConfig
 from mini_gpt.model import MiniGPT
 
 
@@ -67,7 +66,7 @@ def main():
 
 
     best_model_path = Path(
-        GPTConfig.CHECKPOINT_DIR
+        ModelConfig.CHECKPOINT_DIR
     ) / "best_model.pt"
 
     model = load_model(
