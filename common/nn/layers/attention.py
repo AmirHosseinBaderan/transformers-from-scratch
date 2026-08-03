@@ -9,16 +9,15 @@ import torch.nn as nn
 class SelfAttention(nn.Module):
 
     def __init__(
-            self,
-            head_dim: int,
-            dropout: float = 0.1,
-            causal: bool = True,
+        self,
+        head_dim: int,
+        dropout: float = 0.1,
+        causal: bool = False,
     ):
         super().__init__()
 
         self.head_dim = head_dim
         self.causal = causal
-
 
         self.query = nn.Linear(
             head_dim,
@@ -35,16 +34,18 @@ class SelfAttention(nn.Module):
             head_dim,
         )
 
-
         self.dropout = nn.Dropout(
             dropout
         )
 
 
-    def forward(self, x):
+    def forward(
+        self,
+        x,
+        causal: bool | None = None,
+    ):
 
         batch, seq, dim = x.shape
-
 
         q = self.query(x)
 
@@ -52,17 +53,22 @@ class SelfAttention(nn.Module):
 
         v = self.value(x)
 
-
         scores = torch.matmul(
             q,
-            k.transpose(-2,-1)
+            k.transpose(-2, -1)
         )
-
 
         scores = scores / math.sqrt(dim)
 
 
-        if self.causal:
+        use_causal = (
+            self.causal
+            if causal is None
+            else causal
+        )
+
+
+        if use_causal:
 
             mask = torch.triu(
                 torch.ones(
@@ -83,7 +89,6 @@ class SelfAttention(nn.Module):
             scores,
             dim=-1
         )
-
 
         weights = self.dropout(
             weights
