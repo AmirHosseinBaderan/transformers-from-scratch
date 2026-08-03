@@ -15,11 +15,11 @@ class MiniBERT(nn.Module):
         vocab_size: int,
         block_size: int,
         embedding_dim: int,
-        num_heads: int,
         num_layers: int,
         dropout: float = 0.1,
     ):
         super().__init__()
+
 
         self.embedding = InputEmbedding(
             vocab_size=vocab_size,
@@ -27,31 +27,37 @@ class MiniBERT(nn.Module):
             embedding_dim=embedding_dim,
         )
 
-        self.blocks = nn.ModuleList(
+
+        self.encoder_blocks = nn.ModuleList(
             [
                 EncoderBlock(
                     embedding_dim=embedding_dim,
-                    num_heads=num_heads,
                     dropout=dropout,
                 )
                 for _ in range(num_layers)
             ]
         )
 
+
         self.norm = LayerNorm(
-            embedding_dim
+            embedding_dim,
         )
+
 
         self.apply(
             self._init_weights
         )
+
 
     def _init_weights(
         self,
         module,
     ):
 
-        if isinstance(module, nn.Linear):
+        if isinstance(
+            module,
+            nn.Linear,
+        ):
 
             nn.init.normal_(
                 module.weight,
@@ -64,6 +70,7 @@ class MiniBERT(nn.Module):
                     module.bias
                 )
 
+
         elif isinstance(
             module,
             nn.Embedding,
@@ -75,6 +82,7 @@ class MiniBERT(nn.Module):
                 std=0.02,
             )
 
+
     def forward(
         self,
         input_ids: torch.Tensor,
@@ -85,15 +93,18 @@ class MiniBERT(nn.Module):
             input_ids
         )
 
-        for block in self.blocks:
+
+        for block in self.encoder_blocks:
 
             x = block(
                 x,
                 attention_mask=attention_mask,
             )
 
+
         x = self.norm(
             x
         )
+
 
         return x
