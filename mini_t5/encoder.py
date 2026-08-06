@@ -2,10 +2,10 @@ import torch
 from torch import nn
 
 
-from modules.embedding import TokenEmbedding
-from modules.positional_encoding import PositionalEncoding
-from modules.encoder_block import EncoderBlock
-from modules.layer_norm import LayerNorm
+from mini_t5.modules.embedding import TokenEmbedding
+from mini_t5.modules.positional_encoding import PositionalEncoding
+from mini_t5.modules.encoder_block import EncoderBlock
+from mini_t5.modules.layer_norm import LayerNorm
 
 
 

@@ -2,8 +2,8 @@ import torch
 from torch import nn
 
 
-from encoder import T5Encoder
-from decoder import T5Decoder
+from mini_t5.encoder import T5Encoder
+from mini_t5.decoder import T5Decoder
 
 
 

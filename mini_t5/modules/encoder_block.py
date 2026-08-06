@@ -2,9 +2,9 @@ import torch
 from torch import nn
 
 
-from modules.multi_head_attention import MultiHeadAttention
-from modules.feed_forward import FeedForward
-from modules.layer_norm import LayerNorm
+from mini_t5.modules.multi_head_attention import MultiHeadAttention
+from mini_t5.modules.feed_forward import FeedForward
+from mini_t5.modules.layer_norm import LayerNorm
 
 
 

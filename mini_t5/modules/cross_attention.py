@@ -1,7 +1,7 @@
 import torch
 from torch import nn
 
-from modules.multi_head_attention import MultiHeadAttention
+from mini_t5.modules.multi_head_attention import MultiHeadAttention
 
 
 
