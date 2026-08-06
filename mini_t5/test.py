@@ -1,10 +1,10 @@
 import torch
 
-from encoder import T5Encoder
+from decoder import T5Decoder
 
 
 
-model = T5Encoder(
+decoder = T5Decoder(
     vocab_size=1000,
     embedding_dim=128,
     num_layers=3,
@@ -15,14 +15,27 @@ model = T5Encoder(
 
 
 
-x = torch.randint(
+decoder_input = torch.randint(
     0,
     1000,
-    (2,20)
+    (2,15)
 )
 
 
-out = model(x)
+
+encoder_output = torch.randn(
+    2,
+    20,
+    128
+)
+
+
+
+out = decoder(
+    decoder_input,
+    encoder_output
+)
+
 
 
 print(out.shape)
