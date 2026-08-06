@@ -1,25 +1,33 @@
-from mini_t5.modules.tokenizer import CharacterTokenizer
-from mini_t5.modules.dataset import TranslationDataset
+import torch
+
+from mini_t5.modules.embedding import TokenEmbedding
+from mini_t5.modules.positional_encoding import PositionalEncoding
 
 
-texts = [
-    "سلام",
-    "hello",
-]
-
-
-tokenizer = CharacterTokenizer()
-
-tokenizer.fit(texts)
-
-
-dataset = TranslationDataset(
-    "./common/data/raw/en_fa_translation_dataset.csv",
-    tokenizer,
+batch = torch.tensor(
+    [
+        [1,2,3,4],
+        [4,3,2,1]
+    ]
 )
 
 
-item = dataset[0]
+embedding = TokenEmbedding(
+    vocab_size=100,
+    embedding_dim=32
+)
 
 
-print(item)
+position = PositionalEncoding(
+    embedding_dim=32
+)
+
+
+x = embedding(batch)
+
+print(x.shape)
+
+
+x = position(x)
+
+print(x.shape)
