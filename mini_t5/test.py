@@ -1,6 +1,6 @@
 import torch
 
-from mini_t5.modules.multi_head_attention import MultiHeadAttention
+from modules.feed_forward import FeedForward
 
 
 
@@ -11,17 +11,15 @@ x = torch.randn(
 )
 
 
-attention = MultiHeadAttention(
+
+ff = FeedForward(
     embedding_dim=64,
-    num_heads=8
+    hidden_dim=256
 )
 
 
-out = attention(
-    x,
-    x,
-    x
-)
+
+out = ff(x)
 
 
 print(out.shape)
