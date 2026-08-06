@@ -1,7 +1,6 @@
 import torch
 
-from modules.feed_forward import FeedForward
-
+from modules.layer_norm import LayerNorm
 
 
 x = torch.randn(
@@ -11,15 +10,10 @@ x = torch.randn(
 )
 
 
-
-ff = FeedForward(
-    embedding_dim=64,
-    hidden_dim=256
-)
+norm = LayerNorm(64)
 
 
-
-out = ff(x)
+out = norm(x)
 
 
 print(out.shape)
