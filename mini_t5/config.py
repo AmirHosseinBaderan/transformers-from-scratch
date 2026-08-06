@@ -46,6 +46,7 @@ class T5Config:
     # Checkpoint settings (T5-specific)
     CHECKPOINT_DIR = "mini_t5/checkpoints"
     KEEP_LAST_N_CHECKPOINTS = ModelConfig.KEEP_LAST_N_CHECKPOINTS
+    TOKENIZER_PATH = CHECKPOINT_DIR + "/tokenizer.json"
 
     # Early stopping settings (from ModelConfig)
     EARLY_STOPPING_PATIENCE = ModelConfig.EARLY_STOPPING_PATIENCE

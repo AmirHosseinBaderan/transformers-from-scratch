@@ -40,6 +40,10 @@ def build_trainer():
 
     tokenizer.fit(texts)
 
+    # Save tokenizer for inference
+    tokenizer.save(T5Config.TOKENIZER_PATH)
+    logger.info(f"Tokenizer saved to {T5Config.TOKENIZER_PATH}")
+
     train_dataset = TranslationDataset(
         T5Config.TRAIN_CSV_PATH,
         tokenizer,
