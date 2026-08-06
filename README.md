@@ -11,19 +11,31 @@ This document describes every layer of the `transformers-from-scratch` project, 
 │                        Entry Point (main_gpt.py)                    │
 │  Runs data pipeline → then trains the model                        │
 └──────────────────────────────┬──────────────────────────────────────┘
-                               │
-          ┌────────────────────┼────────────────────┐
-          ▼                    ▼                     ▼
-   ┌──────────────┐  ┌─────────────────┐  ┌──────────────────┐
-   │  Data Layer   │  │  Model Layer    │  │  Training Layer  │
-   │  (common/data)│  │  (common/nn)    │  │  (common/training)│
-   └──────────────┘  └─────────────────┘  └──────────────────┘
-          │                    │                     │
-          ▼                    ▼                     ▼
-   ┌──────────────┐  ┌─────────────────┐  ┌──────────────────┐
-   │  Config Layer │  │  Utility Layer  │  │  MiniGPT App     │
-   │  (common/configs)│ (common/utils) │  │  (mini_gpt/)     │
-   └──────────────┘  └─────────────────┘  └──────────────────┘
+                                │
+           ┌────────────────────┼────────────────────┐
+           ▼                    ▼                     ▼
+    ┌──────────────┐  ┌─────────────────┐  ┌──────────────────┐
+    │  Data Layer   │  │  Model Layer    │  │  Training Layer  │
+    │  (common/data)│  │  (common/nn)    │  │  (common/training)│
+    └──────────────┘  └─────────────────┘  └──────────────────┘
+           │                    │                     │
+           ▼                    ▼                     ▼
+    ┌──────────────┐  ┌─────────────────┐  ┌──────────────────┐
+    │  Config Layer │  │  Utility Layer  │  │  MiniGPT App     │
+    │  (common/configs)│ (common/utils) │  │  (mini_gpt/)     │
+    └──────────────┘  └─────────────────┘  └──────────────────┘
+           │                    │                     │
+           ▼                    ▼                     ▼
+    ┌──────────────┐  ┌─────────────────┐  ┌──────────────────┐
+    │  Data Layer   │  │  Model Layer    │  │  Training Layer  │
+    │  (common/data)│  │  (common/nn)    │  │  (common/training)│
+    └──────────────┘  └─────────────────┘  └──────────────────┘
+           │                    │                     │
+           ▼                    ▼                     ▼
+    ┌──────────────┐  ┌─────────────────┐  ┌──────────────────┐
+    │  Config Layer │  │  Utility Layer  │  │  MiniT5 App      │
+    │  (common/configs)│ (common/utils) │  │  (mini_t5/)      │
+    └──────────────┘  └─────────────────┘  └──────────────────┘
 ```
 
 ---
@@ -326,7 +338,183 @@ The `mini_gpt/` directory contains the concrete application that uses all the sh
 
 ---
 
-## 7. Entry Point (`main_gpt.py`)
+## 7. Application Layer (`mini_t5/`)
+
+The `mini_t5/` directory contains an **encoder-decoder transformer** implementation of the T5 (Text-to-Text Transfer Transformer) architecture, designed for English-to-Farsi translation. Unlike `mini_gpt/` (decoder-only), this application uses both an encoder and a decoder.
+
+### `config.py` — `T5Config`
+
+- **What**: Configuration class for MiniT5 that inherits hardware-auto-detected settings from `ModelConfig` and overrides T5-specific paths and settings.
+- **Why**: Allows MiniT5 to share the same memory-adaptive configuration logic as other models while maintaining its own dataset paths, checkpoint directory, and TensorBoard log directory.
+- **How it works**: Imports `ModelConfig` and re-exports most settings, overriding only `TRAIN_CSV_PATH`, `VAL_CSV_PATH`, `MAX_LENGTH`, `CHECKPOINT_DIR`, `TOKENIZER_PATH`, and `TENSORBOARD_LOG_DIR`.
+
+### `model.py` — `MiniT5`
+
+- **What**: The complete encoder-decoder T5 model.
+- **Why**: This is the core model that the project trains for sequence-to-sequence tasks (translation).
+- **How it works**:
+   1. Creates a `T5Encoder` and a `T5Decoder`.
+   2. Adds a final `nn.Linear` output projection from embedding dimension to vocabulary size.
+   3. `forward(encoder_input_ids, decoder_input_ids, encoder_mask, decoder_mask, cross_mask)` — runs the encoder, then the decoder, then projects to logits. Auto-generates a causal mask for the decoder if not provided.
+   4. Supports **gradient checkpointing** for memory-efficient training.
+
+### `encoder.py` — `T5Encoder`
+
+- **What**: The encoder component of the T5 model.
+- **Why**: Processes the input sequence and produces context vectors that the decoder attends to.
+- **How it works**:
+   1. `TokenEmbedding` converts input token IDs to dense vectors.
+   2. `PositionalEncoding` adds sinusoidal positional information.
+   3. A stack of `EncoderBlock` layers applies multi-head self-attention and feed-forward transformations.
+   4. A final `LayerNorm` normalizes the output.
+
+### `decoder.py` — `T5Decoder`
+
+- **What**: The decoder component of the T5 model.
+- **Why**: Generates the output sequence autoregressively, attending to both its own previous tokens and the encoder's output.
+- **How it works**:
+   1. `TokenEmbedding` and `PositionalEncoding` for the decoder input.
+   2. A stack of `DecoderBlock` layers, each containing masked self-attention, cross-attention to the encoder, and a feed-forward network.
+   3. A final `LayerNorm` normalizes the output.
+
+### `main_train.py` — Training Entry Point
+
+- **What**: The script that starts MiniT5 training.
+- **Why**: Orchestrates the training pipeline with OOM error handling and memory cleanup.
+- **How it works**:
+   1. Logs the training configuration.
+   2. Builds the trainer via `build_trainer()`.
+   3. Resumes from the latest checkpoint if available.
+   4. Runs the training loop.
+   5. Handles OOM errors with actionable suggestions (reduce batch size, enable gradient checkpointing, etc.).
+   6. Performs aggressive memory cleanup in a `finally` block.
+
+### `predict.py` — Inference Script
+
+- **What**: Loads a trained MiniT5 model and runs English-to-Farsi translation.
+- **Why**: Provides a simple way to use the trained model for inference.
+- **How it works**:
+   1. Loads the tokenizer and best model checkpoint.
+   2. `T5Translator.translate(text)` — encodes the input, generates an encoder mask, then runs autoregressive decoding: starts with BOS, repeatedly calls the model, takes the last logit, and appends the predicted token until EOS or max length.
+   3. Uses **greedy decoding** (argmax) for simplicity.
+   4. `main()` provides an interactive CLI.
+
+### `modules/` — Model Building Blocks
+
+#### `modules/embedding.py` — `TokenEmbedding`
+
+- **What**: A wrapper around `nn.Embedding` that scales output by `sqrt(embedding_dim)`.
+- **Why**: The scaling factor helps stabilize training by keeping the variance of the embeddings manageable.
+
+#### `modules/positional_encoding.py` — `PositionalEncoding`
+
+- **What**: Implements sinusoidal positional encoding (like the original Transformer).
+- **Why**: Transformers have no inherent sense of order; positional encoding gives the model information about token positions.
+- **How it works**: Pre-computes a matrix using sine (even indices) and cosine (odd indices) functions, registered as a buffer. Added to token embeddings in the forward pass with dropout.
+
+#### `modules/multi_head_attention.py` — `MultiHeadAttention`
+
+- **What**: Multi-head scaled dot-product attention.
+- **Why**: Allows the model to attend to different types of relationships simultaneously.
+- **How it works**:
+   1. Projects input into Q, K, V via separate linear layers.
+   2. Splits into `num_heads` chunks and reshapes to `(batch, num_heads, seq_len, head_dim)`.
+   3. Computes `softmax(Q @ K^T / sqrt(head_dim)) @ V`.
+   4. Applies an optional mask (padding or causal).
+   5. Combines heads and projects back to the original dimension.
+
+#### `modules/cross_attention.py` — `CrossAttention`
+
+- **What**: A wrapper around `MultiHeadAttention` for the decoder's cross-attention sub-layer.
+- **Why**: Allows the decoder to attend to the encoder's output, focusing on relevant input parts when generating each output token.
+- **How it works**: Queries come from decoder states; keys and values come from encoder output.
+
+#### `modules/encoder_block.py` — `EncoderBlock`
+
+- **What**: A single encoder layer.
+- **Why**: Stacking multiple encoder blocks creates the deep transformer that can learn complex input representations.
+- **How it works** (pre-norm architecture):
+   1. **Self-Attention**: Multi-head self-attention with optional padding mask.
+   2. **Residual + LayerNorm**: `x = LayerNorm(x + Attention(x))`
+   3. **Feed-Forward**: Position-wise FFN (Linear → GELU → Linear).
+   4. **Residual + LayerNorm**: `x = LayerNorm(x + FFN(x))`
+- Supports **gradient checkpointing**.
+
+#### `modules/decoder_block.py` — `DecoderBlock`
+
+- **What**: A single decoder layer with three sub-layers.
+- **Why**: The fundamental repeating unit of the decoder, enabling autoregressive generation with encoder context.
+- **How it works** (pre-norm architecture):
+   1. **Masked Self-Attention**: Decoder attends to previous tokens only (causal mask).
+   2. **Residual + LayerNorm**: `x = LayerNorm(x + SelfAttention(x))`
+   3. **Cross-Attention**: Decoder attends to encoder output.
+   4. **Residual + LayerNorm**: `x = LayerNorm(x + CrossAttention(x, encoder_output))`
+   5. **Feed-Forward**: Position-wise FFN.
+   6. **Residual + LayerNorm**: `x = LayerNorm(x + FFN(x))`
+- Supports **gradient checkpointing**.
+
+#### `modules/feed_forward.py` — `FeedForward`
+
+- **What**: Position-wise feed-forward network: `Linear → GELU → Dropout → Linear → Dropout`.
+- **Why**: Provides non-linear transformation at each position after attention.
+- **How it works**: The hidden dimension is 4× the embedding dimension (standard in transformers).
+
+#### `modules/layer_norm.py` — `LayerNorm`
+
+- **What**: Custom layer normalization implementation.
+- **Why**: Stabilizes training by normalizing activations across the feature dimension.
+- **How it works**: Computes mean and variance over the last dimension, normalizes, then applies learnable `gamma` (scale) and `beta` (shift) parameters.
+
+#### `modules/tokenizer.py` — `CharacterTokenizer`
+
+- **What**: A character-level tokenizer for the translation task.
+- **Why**: Character-level tokenization is simple, has no unknown tokens, and works well for small datasets with limited vocabulary.
+- **How it works**:
+   - `fit(texts)` — builds vocabulary from all unique characters in the training data.
+   - `encode(text)` — converts text to token IDs with optional BOS/EOS.
+   - `decode(ids)` — converts token IDs back to text, skipping special tokens.
+   - `save/load` — persists vocabulary as JSON.
+
+#### `modules/dataset.py` — `TranslationDataset`
+
+- **What**: A PyTorch `Dataset` for English-to-Farsi translation.
+- **Why**: Provides a clean interface for loading and preprocessing translation pairs.
+- **How it works**:
+   - Reads a CSV with `source` and `target` columns.
+   - Tokenizes both sequences.
+   - Creates decoder inputs by shifting the target right by one (teacher forcing).
+   - Pads or truncates to `max_length`.
+   - Returns `encoder_input_ids`, `decoder_input_ids`, and `labels`.
+
+### `train/` — Training Loop
+
+#### `train/trainer.py` — `T5Trainer` & `build_trainer()`
+
+- **What**: The training orchestrator and factory function.
+- **Why**: Separates training loop logic from setup logic.
+- **How it works**:
+   - `build_trainer()` — assembles tokenizer, datasets, model, optimizer, loss, checkpoint manager, early stopping, and TensorBoard logger.
+   - `T5Trainer.train()` — iterates over epochs, calls `train_one_epoch()` and `validate_one_epoch()`, logs metrics, saves checkpoints, checks early stopping, and cleans up memory.
+
+#### `train/train_one_epoch.py` — `train_one_epoch()`
+
+- **What**: Runs one epoch of training with memory optimizations.
+- **Why**: Enables training on limited hardware.
+- **How it works**:
+   1. Gradient accumulation over multiple batches.
+   2. Mixed precision training with `GradScaler`.
+   3. Gradient clipping.
+   4. Aggressive tensor deletion and periodic CUDA cache cleanup.
+
+#### `train/validate_one_epoch.py` — `validate_one_epoch()`
+
+- **What**: Runs one epoch of validation.
+- **Why**: Evaluates model performance without updating weights.
+- **How it works**: Uses `torch.no_grad()`, computes average loss, and performs memory cleanup.
+
+---
+
+## 9. Entry Point (`main_gpt.py`)
 
 - **What**: The top-level pipeline script that runs the data pipeline and then training sequentially.
 - **Why**: Provides a single command to go from raw CSV data to a trained model.
@@ -334,7 +522,7 @@ The `mini_gpt/` directory contains the concrete application that uses all the sh
 
 ---
 
-## 8. Data Pipeline (`data_pipeline.py`)
+## 10. Data Pipeline (`data_pipeline.py`)
 
 - **What**: The standalone data preparation script.
 - **Why**: Separates data preparation from training so they can be run independently.
@@ -346,7 +534,7 @@ The `mini_gpt/` directory contains the concrete application that uses all the sh
 
 ---
 
-## Summary of Data Flow
+## 11. Summary of Data Flow
 
 ```
 CSV files (raw/)
@@ -368,4 +556,21 @@ CheckpointManager saves best model → TensorBoardLogger tracks metrics
     │
     ▼
 generate.py loads best model → text generation
+
+CSV files (raw/t5_train.csv, t5_validation.csv)
+    │
+    ▼
+CharacterTokenizer (fit on source + target texts)
+    │
+    ▼
+TranslationDataset → DataLoader → (encoder_input_ids, decoder_input_ids, labels)
+    │
+    ▼
+MiniT5 model (Encoder → Decoder → Output Projection) → CrossEntropyLoss → optimizer.step()
+    │
+    ▼
+CheckpointManager saves best model → TensorBoardLogger tracks metrics
+    │
+    ▼
+predict.py loads best model → English-to-Farsi translation
 ```
