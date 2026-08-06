@@ -1,33 +1,27 @@
 import torch
 
-from mini_t5.modules.embedding import TokenEmbedding
-from mini_t5.modules.positional_encoding import PositionalEncoding
+from mini_t5.modules.multi_head_attention import MultiHeadAttention
 
 
-batch = torch.tensor(
-    [
-        [1,2,3,4],
-        [4,3,2,1]
-    ]
+
+x = torch.randn(
+    2,
+    10,
+    64
 )
 
 
-embedding = TokenEmbedding(
-    vocab_size=100,
-    embedding_dim=32
+attention = MultiHeadAttention(
+    embedding_dim=64,
+    num_heads=8
 )
 
 
-position = PositionalEncoding(
-    embedding_dim=32
+out = attention(
+    x,
+    x,
+    x
 )
 
 
-x = embedding(batch)
-
-print(x.shape)
-
-
-x = position(x)
-
-print(x.shape)
+print(out.shape)
