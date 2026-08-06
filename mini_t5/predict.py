@@ -1,5 +1,4 @@
 import torch
-import torch.nn.functional as F
 
 from mini_t5.config import T5Config
 from mini_t5.model import MiniT5
@@ -8,18 +7,16 @@ from mini_t5.modules.tokenizer import CharacterTokenizer
 from common.utils.logger import logger
 
 
-
 def load_best_model():
     """
     Load trained MiniT5 model and tokenizer.
     """
 
-    # Load tokenizer from training
     tokenizer = CharacterTokenizer()
-    tokenizer.load(
-       T5Config.TOKENIZER_PATH
-    )
 
+    tokenizer.load(
+        T5Config.TOKENIZER_PATH
+    )
 
     model = MiniT5(
         vocab_size=tokenizer.vocab_size,
@@ -32,46 +29,36 @@ def load_best_model():
         use_gradient_checkpointing=False,
     )
 
-
     checkpoint_path = (
         T5Config.CHECKPOINT_DIR
         + "/best_model.pt"
     )
-
 
     checkpoint = torch.load(
         checkpoint_path,
         map_location=T5Config.DEVICE
     )
 
-
     model.load_state_dict(
         checkpoint["model_state_dict"]
     )
-
 
     model.to(
         T5Config.DEVICE
     )
 
-
     model.eval()
-
 
     epoch = checkpoint.get(
         "epoch",
         "unknown"
     )
 
-
     logger.info(
         f"Loaded model epoch={epoch}"
     )
 
-
     return model, tokenizer
-
-
 
 
 class T5Translator:
@@ -80,22 +67,14 @@ class T5Translator:
         self,
         model,
         tokenizer,
-        device="cpu"
+        device,
     ):
-
         self.model = model
-
         self.tokenizer = tokenizer
-
         self.device = device
 
-
-        self.model.to(
-            device
-        )
-
+        self.model.to(device)
         self.model.eval()
-
 
 
     @torch.no_grad()
@@ -103,31 +82,33 @@ class T5Translator:
         self,
         text,
         max_length=64,
-        temperature=0.8,
     ):
 
-
+        # Encoder input
         encoder_ids = self.tokenizer.encode(
             text
         )
 
-
-        encoder_ids = torch.tensor(
+        encoder_tensor = torch.tensor(
             encoder_ids,
             dtype=torch.long,
             device=self.device
         ).unsqueeze(0)
 
 
+        # Encoder padding mask
+        encoder_mask = (
+            encoder_tensor != self.tokenizer.pad_id
+        ).unsqueeze(1).unsqueeze(2)
 
+
+        # Decoder starts with BOS
         decoder_ids = [
             self.tokenizer.bos_id
         ]
 
 
-
         for _ in range(max_length):
-
 
             decoder_tensor = torch.tensor(
                 decoder_ids,
@@ -136,38 +117,23 @@ class T5Translator:
             ).unsqueeze(0)
 
 
-
             logits = self.model(
-                encoder_ids,
-                decoder_tensor
+                encoder_tensor,
+                decoder_tensor,
+                encoder_mask=encoder_mask,
             )
 
 
-            next_logits = logits[
+            next_token_logits = logits[
                 0,
                 -1
             ]
 
 
-
-            # جلوگیری از تکرار شدید
-            for token in set(decoder_ids):
-
-                next_logits[token] -= 1.5
-
-
-
-            probs = F.softmax(
-                next_logits / temperature,
-                dim=-1
-            )
-
-
-            next_token = torch.multinomial(
-                probs,
-                num_samples=1
+            # Greedy decoding
+            next_token = torch.argmax(
+                next_token_logits
             ).item()
-
 
 
             decoder_ids.append(
@@ -175,10 +141,8 @@ class T5Translator:
             )
 
 
-
             if next_token == self.tokenizer.eos_id:
                 break
-
 
 
         return self.decode_output(
@@ -186,13 +150,12 @@ class T5Translator:
         )
 
 
-
     def decode_output(
         self,
         ids
     ):
 
-        tokens = []
+        output = []
 
 
         for idx in ids:
@@ -209,58 +172,39 @@ class T5Translator:
                 continue
 
 
-            tokens.append(
-                idx
-            )
+            output.append(idx)
 
 
         return self.tokenizer.decode(
-            tokens
+            output
         )
-
-
-
 
 
 def translate_text(
     model,
     tokenizer,
-    text
+    text,
 ):
 
     translator = T5Translator(
         model,
         tokenizer,
-        T5Config.DEVICE
+        T5Config.DEVICE,
     )
-
 
     return translator.translate(
         text
     )
 
 
-
-
-
 def main():
 
-    logger.info(
-        "=" * 60
-    )
-
-    logger.info(
-        "MiniT5 English To Farsi Translator"
-    )
-
-    logger.info(
-        "=" * 60
-    )
-
+    logger.info("=" * 60)
+    logger.info("MiniT5 English To Farsi Translator")
+    logger.info("=" * 60)
 
 
     model, tokenizer = load_best_model()
-
 
 
     translator = T5Translator(
@@ -268,7 +212,6 @@ def main():
         tokenizer,
         T5Config.DEVICE
     )
-
 
 
     while True:
@@ -280,7 +223,6 @@ def main():
             ).strip()
 
 
-
             if text.lower() in [
                 "quit",
                 "exit",
@@ -289,10 +231,8 @@ def main():
                 break
 
 
-
             if not text:
                 continue
-
 
 
             result = translator.translate(
@@ -306,21 +246,14 @@ def main():
 
 
         except KeyboardInterrupt:
-
             break
 
 
-
         except Exception as e:
-
             logger.error(
                 str(e)
             )
 
 
-
-
-
 if __name__ == "__main__":
-
     main()
