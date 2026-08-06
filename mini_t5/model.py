@@ -63,6 +63,22 @@ class MiniT5(nn.Module):
         self.encoder.gradient_checkpointing_disable()
         self.decoder.gradient_checkpointing_disable()
 
+    def generate_causal_mask(self, seq_len, device):
+        """Generate causal mask for decoder self-attention.
+        
+        Args:
+            seq_len: Sequence length.
+            device: Device to create the mask on.
+            
+        Returns:
+            Causal mask of shape (seq_len, seq_len) where mask[i, j] = 1
+            if j <= i (can attend), 0 if j > i (cannot attend).
+        """
+        mask = torch.tril(
+            torch.ones(seq_len, seq_len, device=device)
+        )
+        return mask
+
     def forward(
         self,
         encoder_input_ids,
@@ -71,6 +87,12 @@ class MiniT5(nn.Module):
         decoder_mask=None,
         cross_mask=None,
     ):
+        # Auto-generate causal mask for decoder if not provided
+        if decoder_mask is None:
+            decoder_mask = self.generate_causal_mask(
+                decoder_input_ids.size(1),
+                encoder_input_ids.device,
+            )
 
         encoder_output = self.encoder(
             encoder_input_ids,
