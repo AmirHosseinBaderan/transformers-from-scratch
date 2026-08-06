@@ -1,23 +1,34 @@
 import torch
 
-from modules.encoder_block import EncoderBlock
+from modules.decoder_block import DecoderBlock
 
 
-x = torch.randn(
+
+decoder_input = torch.randn(
     2,
-    20,
+    10,
     128
 )
 
 
-block = EncoderBlock(
+encoder_output = torch.randn(
+    2,
+    15,
+    128
+)
+
+
+block = DecoderBlock(
     embedding_dim=128,
     num_heads=8,
     ff_hidden_dim=512
 )
 
 
-out = block(x)
+out = block(
+    decoder_input,
+    encoder_output
+)
 
 
 print(out.shape)
