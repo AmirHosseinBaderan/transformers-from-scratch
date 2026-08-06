@@ -1,17 +1,25 @@
 from mini_t5.modules.tokenizer import CharacterTokenizer
+from mini_t5.modules.dataset import TranslationDataset
+
 
 texts = [
     "سلام",
     "hello",
-    "good morning",
 ]
+
 
 tokenizer = CharacterTokenizer()
 
 tokenizer.fit(texts)
 
-ids = tokenizer.encode("سلام")
 
-print(ids)
+dataset = TranslationDataset(
+    "./common/data/raw/en_fa_translation_dataset.csv",
+    tokenizer,
+)
 
-print(tokenizer.decode(ids))
+
+item = dataset[0]
+
+
+print(item)
