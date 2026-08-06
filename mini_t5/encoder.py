@@ -20,15 +20,16 @@ class T5Encoder(nn.Module):
         ff_hidden_dim,
         max_length,
         dropout=0.1,
+        use_gradient_checkpointing: bool = False,
     ):
         super().__init__()
 
+        self._use_gradient_checkpointing = use_gradient_checkpointing
 
         self.embedding = TokenEmbedding(
             vocab_size,
             embedding_dim
         )
-
 
         self.position = PositionalEncoding(
             embedding_dim,
@@ -36,26 +37,35 @@ class T5Encoder(nn.Module):
             dropout
         )
 
-
         self.layers = nn.ModuleList(
             [
                 EncoderBlock(
                     embedding_dim,
                     num_heads,
                     ff_hidden_dim,
-                    dropout
+                    dropout,
+                    use_gradient_checkpointing=use_gradient_checkpointing,
                 )
 
                 for _ in range(num_layers)
             ]
         )
 
-
         self.norm = LayerNorm(
             embedding_dim
         )
 
+    def gradient_checkpointing_enable(self) -> None:
+        """Enable gradient checkpointing for all encoder blocks."""
+        self._use_gradient_checkpointing = True
+        for block in self.layers:
+            block.use_gradient_checkpointing = True
 
+    def gradient_checkpointing_disable(self) -> None:
+        """Disable gradient checkpointing for all encoder blocks."""
+        self._use_gradient_checkpointing = False
+        for block in self.layers:
+            block.use_gradient_checkpointing = False
 
     def forward(
         self,
@@ -63,16 +73,13 @@ class T5Encoder(nn.Module):
         mask=None,
     ):
 
-
         x = self.embedding(
             input_ids
         )
 
-
         x = self.position(
             x
         )
-
 
         for layer in self.layers:
 
@@ -81,10 +88,8 @@ class T5Encoder(nn.Module):
                 mask
             )
 
-
         x = self.norm(
             x
         )
-
 
         return x

@@ -16,8 +16,8 @@ class T5Config:
     """
 
     # Dataset paths
-    TRAIN_CSV_PATH = Path("common/data/raw/train.csv")
-    VAL_CSV_PATH = Path("common/data/raw/validation.csv")
+    TRAIN_CSV_PATH = Path("common/data/raw/t5_train.csv")
+    VAL_CSV_PATH = Path("common/data/raw/t5_validation.csv")
 
     # Model architecture (override if needed)
     EMBEDDING_DIM = ModelConfig.EMBEDDING_DIM
