@@ -1,0 +1,1047 @@
+source,target
+Hello,سلام
+سلام,Hello
+Good morning!,صبح بخیر!
+صبح بخیر!,Good morning!
+Good evening,عصر بخیر
+عصر بخیر,Good evening
+Good night,شب بخیر
+شب بخیر,Good night
+How are you?,حال شما چطور است؟
+حال شما چطور است؟,How are you?
+I am fine.,من خوبم.
+من خوبم.,I am fine.
+Thank you,متشکرم
+متشکرم,Thank you
+You are welcome,خواهش می‌کنم
+خواهش می‌کنم,You are welcome
+Please,لطفاً
+لطفاً,Please
+Sorry,ببخشید
+ببخشید,Sorry
+Excuse me,ببخشید
+ببخشید,Excuse me
+Yes,بله
+بله,Yes
+No,نه
+نه,No
+What is your name?,اسم شما چیست؟
+اسم شما چیست؟,What is your name?
+My name is Ali.,اسم من علی است.
+اسم من علی است.,My name is Ali.
+Nice to meet you,از آشنایی با شما خوشبختم
+از آشنایی با شما خوشبختم,Nice to meet you
+How old are you?,چند سالته؟
+چند سالته؟,How old are you?
+I am twenty years old.,من بیست ساله هستم.
+من بیست ساله هستم.,I am twenty years old.
+Where are you from?,اهل کجا هستی؟
+اهل کجا هستی؟,Where are you from?
+I am from Iran.,من اهل ایران هستم.
+من اهل ایران هستم.,I am from Iran.
+What time is it?,ساعت چند است؟
+ساعت چند است؟,What time is it?
+It is three o'clock.,ساعت سه است.
+ساعت سه است.,It is three o'clock.
+Where is the bathroom?,دستشویی کجاست؟
+دستشویی کجاست؟,Where is the bathroom?
+How much is it?,قیمتش چقدر است؟
+قیمتش چقدر است؟,How much is it?
+It is too expensive.,خیلی گران است.
+خیلی گران است.,It is too expensive.
+Can you help me?,می‌تونی کمکم کنی؟
+می‌تونی کمکم کنی؟,Can you help me?
+I need help.,به کمک نیاز دارم.
+به کمک نیاز دارم.,I need help.
+I don't understand.,متوجه نمی‌شوم.
+متوجه نمی‌شوم.,I don't understand.
+Please speak slowly.,لطفاً آهسته صحبت کن.
+لطفاً آهسته صحبت کن.,Please speak slowly.
+Can you repeat that?,می‌تونی دوباره بگی؟
+می‌تونی دوباره بگی؟,Can you repeat that?
+What does this mean?,این یعنی چه؟
+این یعنی چه؟,What does this mean?
+I am hungry.,من گرسنه‌ام.
+من گرسنه‌ام.,I am hungry.
+I am thirsty.,من تشنه‌ام.
+من تشنه‌ام.,I am thirsty.
+I am tired.,من خسته‌ام.
+من خسته‌ام.,I am tired.
+I am happy.,من خوشحالم.
+من خوشحالم.,I am happy.
+I am sad.,من غمگینم.
+من غمگینم.,I am sad.
+I love you.,دوستت دارم.
+دوستت دارم.,I love you.
+I like it.,دوستش دارم.
+دوستش دارم.,I like it.
+I don't like it.,دوستش ندارم.
+دوستش ندارم.,I don't like it.
+This is good.,این خوب است.
+این خوب است.,This is good.
+This is bad.,این بد است.
+این بد است.,This is bad.
+Open the door.,در را باز کن.
+در را باز کن.,Open the door.
+Close the window.,پنجره را ببند.
+پنجره را ببند.,Close the window.
+Turn on the light.,چراغ را روشن کن.
+چراغ را روشن کن.,Turn on the light.
+Turn off the light.,چراغ را خاموش کن.
+چراغ را خاموش کن.,Turn off the light.
+Sit down.,بشین.
+بشین.,Sit down.
+Stand up.,پاشو.
+پاشو.,Stand up.
+Come here.,بیا اینجا.
+بیا اینجا.,Come here.
+Go there.,برو آنجا.
+برو آنجا.,Go there.
+Wait a moment.,یک لحظه صبر کن.
+یک لحظه صبر کن.,Wait a moment.
+Hurry up!,زود باش!
+زود باش!,Hurry up!
+Be careful.,مراقب باش.
+مراقب باش.,Be careful.
+Don't worry.,نگران نباش.
+نگران نباش.,Don't worry.
+Everything is fine.,همه‌چیز خوب است.
+همه‌چیز خوب است.,Everything is fine.
+See you later.,بعداً می‌بینمت.
+بعداً می‌بینمت.,See you later.
+See you tomorrow.,فردا می‌بینمت.
+فردا می‌بینمت.,See you tomorrow.
+Goodbye,خداحافظ
+خداحافظ,Goodbye
+Have a nice day.,روز خوبی داشته باشی.
+روز خوبی داشته باشی.,Have a nice day.
+Happy birthday!,تولدت مبارک!
+تولدت مبارک!,Happy birthday!
+Congratulations!,تبریک می‌گم!
+تبریک می‌گم!,Congratulations!
+I am sorry for being late.,بابت دیر کردن عذر می‌خوام.
+بابت دیر کردن عذر می‌خوام.,I am sorry for being late.
+Where do you live?,کجا زندگی می‌کنی؟
+کجا زندگی می‌کنی؟,Where do you live?
+I live in Tehran.,من در تهران زندگی می‌کنم.
+من در تهران زندگی می‌کنم.,I live in Tehran.
+What do you do?,چه کار می‌کنی؟
+چه کار می‌کنی؟,What do you do?
+I am a student.,من دانشجو هستم.
+من دانشجو هستم.,I am a student.
+I am a teacher.,من معلم هستم.
+من معلم هستم.,I am a teacher.
+Do you speak English?,انگلیسی بلدی؟
+انگلیسی بلدی؟,Do you speak English?
+A little.,کمی.
+کمی.,A little.
+I speak Persian.,من فارسی صحبت می‌کنم.
+من فارسی صحبت می‌کنم.,I speak Persian.
+What is this?,این چیست؟
+این چیست؟,What is this?
+This is a book.,این یک کتاب است.
+این یک کتاب است.,This is a book.
+That is a pen.,آن یک خودکار است.
+آن یک خودکار است.,That is a pen.
+How are you doing?,حالت چطوره؟
+حالت چطوره؟,How are you doing?
+I am doing well.,حالم خوبه.
+حالم خوبه.,I am doing well.
+What's up?,چه خبر؟
+چه خبر؟,What's up?
+Nothing much.,چیزی نیست.
+چیزی نیست.,Nothing much.
+Let's go.,بریم.
+بریم.,Let's go.
+I agree.,موافقم.
+موافقم.,I agree.
+I disagree.,مخالفم.
+مخالفم.,I disagree.
+Of course.,البته.
+البته.,Of course.
+Maybe.,شاید.
+شاید.,Maybe.
+I think so.,فکر می‌کنم همینطوره.
+فکر می‌کنم همینطوره.,I think so.
+I don't know.,نمی‌دانم.
+نمی‌دانم.,I don't know.
+Really?,واقعاً؟
+واقعاً؟,Really?
+Are you sure?,مطمئنی؟
+مطمئنی؟,Are you sure?
+"Yes, I am sure.",بله، مطمئنم.
+بله، مطمئنم.,"Yes, I am sure."
+Please help me.,لطفاً کمکم کن.
+لطفاً کمکم کن.,Please help me.
+Thank you very much.,خیلی ممنونم.
+خیلی ممنونم.,Thank you very much.
+You are very kind.,شما خیلی مهربانید.
+شما خیلی مهربانید.,You are very kind.
+It was nice meeting you.,از ملاقاتت خوشحال شدم.
+از ملاقاتت خوشحال شدم.,It was nice meeting you.
+Call me later.,بعداً بهم زنگ بزن.
+بعداً بهم زنگ بزن.,Call me later.
+I will call you.,بهت زنگ می‌زنم.
+بهت زنگ می‌زنم.,I will call you.
+What is your phone number?,شماره تلفنت چنده؟
+شماره تلفنت چنده؟,What is your phone number?
+My phone number is...,شماره تلفنم ... است.
+شماره تلفنم ... است.,My phone number is...
+Where is the restaurant?,رستوران کجاست؟
+رستوران کجاست؟,Where is the restaurant?
+I want water.,آب می‌خوام.
+آب می‌خوام.,I want water.
+I want tea.,چای می‌خوام.
+چای می‌خوام.,I want tea.
+I want coffee.,قهوه می‌خوام.
+قهوه می‌خوام.,I want coffee.
+The food is delicious.,غذا خوشمزه است.
+غذا خوشمزه است.,The food is delicious.
+The weather is nice.,هوا خوب است.
+هوا خوب است.,The weather is nice.
+It is raining.,باران می‌بارد.
+باران می‌بارد.,It is raining.
+It is sunny.,آفتابی است.
+آفتابی است.,It is sunny.
+It is cold.,سرد است.
+سرد است.,It is cold.
+It is hot.,گرم است.
+گرم است.,It is hot.
+I am cold.,سردمه.
+سردمه.,I am cold.
+I am hot.,گرمه.
+گرمه.,I am hot.
+How was your day?,روزت چطور بود؟
+روزت چطور بود؟,How was your day?
+It was good.,خوب بود.
+خوب بود.,It was good.
+I am busy.,سرم شلوغه.
+سرم شلوغه.,I am busy.
+Are you free?,آزاد هستی؟
+آزاد هستی؟,Are you free?
+Let's meet tomorrow.,فردا همدیگه رو ببینیم.
+فردا همدیگه رو ببینیم.,Let's meet tomorrow.
+What time shall we meet?,ساعت چند همدیگه رو ببینیم؟
+ساعت چند همدیگه رو ببینیم؟,What time shall we meet?
+At five o'clock.,ساعت پنج.
+ساعت پنج.,At five o'clock.
+Okay.,باشه.
+باشه.,Okay.
+Alright.,خوبه.
+خوبه.,Alright.
+No problem.,مشکلی نیست.
+مشکلی نیست.,No problem.
+Don't mention it.,قابلی نداره.
+قابلی نداره.,Don't mention it.
+My pleasure.,خواهش می‌کنم.
+خواهش می‌کنم.,My pleasure.
+I appreciate it.,قدردانم.
+قدردانم.,I appreciate it.
+Take care.,مواظب خودت باش.
+مواظب خودت باش.,Take care.
+Get well soon.,زود خوب شو.
+زود خوب شو.,Get well soon.
+I am sick.,مریضم.
+مریضم.,I am sick.
+I have a headache.,سردرد دارم.
+سردرد دارم.,I have a headache.
+I need a doctor.,به دکتر نیاز دارم.
+به دکتر نیاز دارم.,I need a doctor.
+Where is the hospital?,بیمارستان کجاست؟
+بیمارستان کجاست؟,Where is the hospital?
+Call the police.,به پلیس زنگ بزن.
+به پلیس زنگ بزن.,Call the police.
+Help!,کمک!
+کمک!,Help!
+Fire!,آتش!
+آتش!,Fire!
+I lost my way.,راهم را گم کردم.
+راهم را گم کردم.,I lost my way.
+How can I get to the station?,چطور می‌تونم به ایستگاه برسم؟
+چطور می‌تونم به ایستگاه برسم؟,How can I get to the station?
+Go straight.,مستقیم برو.
+مستقیم برو.,Go straight.
+Turn left.,به چپ بپیچ.
+به چپ بپیچ.,Turn left.
+Turn right.,به راست بپیچ.
+به راست بپیچ.,Turn right.
+It is near.,نزدیک است.
+نزدیک است.,It is near.
+It is far.,دور است.
+دور است.,It is far.
+How long does it take?,چقدر طول می‌کشه؟
+چقدر طول می‌کشه؟,How long does it take?
+About ten minutes.,حدود ده دقیقه.
+حدود ده دقیقه.,About ten minutes.
+I like reading books.,کتاب خوندن رو دوست دارم.
+کتاب خوندن رو دوست دارم.,I like reading books.
+I like watching movies.,فیلم دیدن رو دوست دارم.
+فیلم دیدن رو دوست دارم.,I like watching movies.
+I like listening to music.,گوش دادن به موسیقی رو دوست دارم.
+گوش دادن به موسیقی رو دوست دارم.,I like listening to music.
+What is your favorite color?,رنگ مورد علاقه‌ات چیه؟
+رنگ مورد علاقه‌ات چیه؟,What is your favorite color?
+My favorite color is blue.,رنگ مورد علاقه‌ام آبی است.
+رنگ مورد علاقه‌ام آبی است.,My favorite color is blue.
+What is your favorite food?,غذای مورد علاقه‌ات چیه؟
+غذای مورد علاقه‌ات چیه؟,What is your favorite food?
+I like pizza.,پیتزا دوست دارم.
+پیتزا دوست دارم.,I like pizza.
+Do you have any brothers or sisters?,خواهر یا برادر داری؟
+خواهر یا برادر داری؟,Do you have any brothers or sisters?
+I have one brother.,یک برادر دارم.
+یک برادر دارم.,I have one brother.
+I have two sisters.,دو خواهر دارم.
+دو خواهر دارم.,I have two sisters.
+This is my friend.,این دوست من است.
+این دوست من است.,This is my friend.
+He is tall.,او قدبلند است.
+او قدبلند است.,He is tall.
+She is beautiful.,او زیبا است.
+او زیبا است.,She is beautiful.
+The cat is small.,گربه کوچک است.
+گربه کوچک است.,The cat is small.
+The dog is big.,سگ بزرگ است.
+سگ بزرگ است.,The dog is big.
+I have a car.,ماشین دارم.
+ماشین دارم.,I have a car.
+I don't have a car.,ماشین ندارم.
+ماشین ندارم.,I don't have a car.
+Do you have a pen?,خودکار داری؟
+خودکار داری؟,Do you have a pen?
+"Yes, I do.",بله، دارم.
+بله، دارم.,"Yes, I do."
+"No, I don't.",نه، ندارم.
+نه، ندارم.,"No, I don't."
+Can I borrow your pen?,می‌تونم خودکارت رو قرض بگیرم؟
+می‌تونم خودکارت رو قرض بگیرم؟,Can I borrow your pen?
+Of course you can.,البته می‌تونی.
+البته می‌تونی.,Of course you can.
+Here you are.,بفرمایید.
+بفرمایید.,Here you are.
+Thank you for your help.,ممنون از کمکت.
+ممنون از کمکت.,Thank you for your help.
+You are welcome anytime.,هر وقت خواستی.
+هر وقت خواستی.,You are welcome anytime.
+What are you doing?,چه کار می‌کنی؟
+چه کار می‌کنی؟,What are you doing?
+I am reading a book.,دارم کتاب می‌خونم.
+دارم کتاب می‌خونم.,I am reading a book.
+I am watching TV.,دارم تلویزیون می‌بینم.
+دارم تلویزیون می‌بینم.,I am watching TV.
+I am cooking.,دارم آشپزی می‌کنم.
+دارم آشپزی می‌کنم.,I am cooking.
+I am working.,دارم کار می‌کنم.
+دارم کار می‌کنم.,I am working.
+I am studying.,دارم درس می‌خونم.
+دارم درس می‌خونم.,I am studying.
+Let's eat.,بزن بریم غذا بخوریم.
+بزن بریم غذا بخوریم.,Let's eat.
+I am full.,سیرم.
+سیرم.,I am full.
+The bill please.,حساب لطفاً.
+حساب لطفاً.,The bill please.
+Keep the change.,باقی‌اش مال خودت.
+باقی‌اش مال خودت.,Keep the change.
+This is delicious.,این خوشمزه است.
+این خوشمزه است.,This is delicious.
+I am learning English.,دارم انگلیسی یاد می‌گیرم.
+دارم انگلیسی یاد می‌گیرم.,I am learning English.
+I am learning Persian.,دارم فارسی یاد می‌گیرم.
+دارم فارسی یاد می‌گیرم.,I am learning Persian.
+Practice makes perfect.,تمرین باعث کمال می‌شود.
+تمرین باعث کمال می‌شود.,Practice makes perfect.
+Good luck!,موفق باشی!
+موفق باشی!,Good luck!
+Have fun!,خوش بگذره!
+خوش بگذره!,Have fun!
+See you soon.,به زودی می‌بینمت.
+به زودی می‌بینمت.,See you soon.
+Take it easy.,آروم باش.
+آروم باش.,Take it easy.
+Cheer up!,روحیه بگیر!
+روحیه بگیر!,Cheer up!
+Don't cry.,گریه نکن.
+گریه نکن.,Don't cry.
+Smile.,لبخند بزن.
+لبخند بزن.,Smile.
+Be quiet.,ساکت باش.
+ساکت باش.,Be quiet.
+Listen carefully.,با دقت گوش کن.
+با دقت گوش کن.,Listen carefully.
+Look at me.,بهم نگاه کن.
+بهم نگاه کن.,Look at me.
+Follow me.,دنبالم بیا.
+دنبالم بیا.,Follow me.
+Wait for me.,برام صبر کن.
+برام صبر کن.,Wait for me.
+I will be back soon.,زود برمی‌گردم.
+زود برمی‌گردم.,I will be back soon.
+Where did you go?,کجا رفتی؟
+کجا رفتی؟,Where did you go?
+I went to the market.,رفتم بازار.
+رفتم بازار.,I went to the market.
+What did you buy?,چی خریدی؟
+چی خریدی؟,What did you buy?
+I bought some fruits.,چند تا میوه خریدم.
+چند تا میوه خریدم.,I bought some fruits.
+How much did you pay?,چقدر پول دادی؟
+چقدر پول دادی؟,How much did you pay?
+It was cheap.,ارزان بود.
+ارزان بود.,It was cheap.
+It was expensive.,گران بود.
+گران بود.,It was expensive.
+I need money.,به پول نیاز دارم.
+به پول نیاز دارم.,I need money.
+Can you lend me some money?,می‌تونی یه کم پول بهم قرض بدی؟
+می‌تونی یه کم پول بهم قرض بدی؟,Can you lend me some money?
+I will pay you back.,برات برمی‌گردونم.
+برات برمی‌گردونم.,I will pay you back.
+I forgot.,فراموش کردم.
+فراموش کردم.,I forgot.
+I remember.,یادم هست.
+یادم هست.,I remember.
+What day is today?,امروز چه روزیه؟
+امروز چه روزیه؟,What day is today?
+Today is Monday.,امروز دوشنبه است.
+امروز دوشنبه است.,Today is Monday.
+Tomorrow is Tuesday.,فردا سه‌شنبه است.
+فردا سه‌شنبه است.,Tomorrow is Tuesday.
+Yesterday was Sunday.,دیروز یکشنبه بود.
+دیروز یکشنبه بود.,Yesterday was Sunday.
+What month is it?,چه ماهی است؟
+چه ماهی است؟,What month is it?
+It is August.,مرداد است.
+مرداد است.,It is August.
+Happy New Year!,سال نو مبارک!
+سال نو مبارک!,Happy New Year!
+Merry Christmas!,کریسمس مبارک!
+کریسمس مبارک!,Merry Christmas!
+Eid Mubarak!,عید مبارک!
+عید مبارک!,Eid Mubarak!
+I miss you.,دلم برات تنگ شده.
+دلم برات تنگ شده.,I miss you.
+I will miss you.,دلم برات تنگ می‌شه.
+دلم برات تنگ می‌شه.,I will miss you.
+Come back soon.,زود برگرد.
+زود برگرد.,Come back soon.
+Safe travels.,سفر به خیر.
+سفر به خیر.,Safe travels.
+Welcome home.,خوش اومدی خونه.
+خوش اومدی خونه.,Welcome home.
+Make yourself at home.,راحت باش.
+راحت باش.,Make yourself at home.
+Would you like some tea?,چای میل داری؟
+چای میل داری؟,Would you like some tea?
+"Yes, please.",بله، لطفاً.
+بله، لطفاً.,"Yes, please."
+"No, thank you.",نه، ممنون.
+نه، ممنون.,"No, thank you."
+How do you feel?,چه حسی داری؟
+چه حسی داری؟,How do you feel?
+I feel great.,عالی حس می‌کنم.
+عالی حس می‌کنم.,I feel great.
+I feel terrible.,افتضاح حس می‌کنم.
+افتضاح حس می‌کنم.,I feel terrible.
+What is the matter?,چه شده؟
+چه شده؟,What is the matter?
+Nothing is wrong.,هیچی نیست.
+هیچی نیست.,Nothing is wrong.
+Are you okay?,خوبی؟
+خوبی؟,Are you okay?
+I am okay.,خوبم.
+خوبم.,I am okay.
+Please wait here.,لطفاً اینجا صبر کن.
+لطفاً اینجا صبر کن.,Please wait here.
+I will be right back.,همین الان برمی‌گردم.
+همین الان برمی‌گردم.,I will be right back.
+Do not touch that.,به آن دست نزن.
+به آن دست نزن.,Do not touch that.
+Be careful with that.,با آن مراقب باش.
+با آن مراقب باش.,Be careful with that.
+This is important.,این مهم است.
+این مهم است.,This is important.
+That is interesting.,آن جالب است.
+آن جالب است.,That is interesting.
+I understand now.,الان فهمیدم.
+الان فهمیدم.,I understand now.
+It makes sense.,منطقی است.
+منطقی است.,It makes sense.
+That is true.,درسته.
+درسته.,That is true.
+That is false.,غلط است.
+غلط است.,That is false.
+I believe you.,باورت دارم.
+باورت دارم.,I believe you.
+I trust you.,بهت اعتماد دارم.
+بهت اعتماد دارم.,I trust you.
+Please forgive me.,لطفاً منو ببخش.
+لطفاً منو ببخش.,Please forgive me.
+I forgive you.,می‌بخشمت.
+می‌بخشمت.,I forgive you.
+No hard feelings.,کدورتی نیست.
+کدورتی نیست.,No hard feelings.
+Let's start over.,از اول شروع کنیم.
+از اول شروع کنیم.,Let's start over.
+Good idea.,ایده خوبیه.
+ایده خوبیه.,Good idea.
+Bad idea.,ایده بدیه.
+ایده بدیه.,Bad idea.
+What should we do?,چیکار باید بکنیم؟
+چیکار باید بکنیم؟,What should we do?
+I have an idea.,یه ایده دارم.
+یه ایده دارم.,I have an idea.
+Tell me more.,بیشتر بگو.
+بیشتر بگو.,Tell me more.
+That is enough.,کافیه.
+کافیه.,That is enough.
+Stop it.,بس کن.
+بس کن.,Stop it.
+Continue.,ادامه بده.
+ادامه بده.,Continue.
+Go ahead.,بفرمایید.
+بفرمایید.,Go ahead.
+After you.,شما بفرمایید.
+شما بفرمایید.,After you.
+Age before beauty.,سن قبل از زیبایی.
+سن قبل از زیبایی.,Age before beauty.
+Ladies first.,خانم‌ها اول.
+خانم‌ها اول.,Ladies first.
+Mind your own business.,به کار خودت برس.
+به کار خودت برس.,Mind your own business.
+It is none of your business.,به تو ربطی نداره.
+به تو ربطی نداره.,It is none of your business.
+Leave me alone.,تنهام بگذار.
+تنهام بگذار.,Leave me alone.
+I need some space.,به کمی فضا نیاز دارم.
+به کمی فضا نیاز دارم.,I need some space.
+I am free now.,الان آزادم.
+الان آزادم.,I am free now.
+Call me when you are free.,هر وقت آزاد شدی زنگ بزن.
+هر وقت آزاد شدی زنگ بزن.,Call me when you are free.
+I am looking forward to it.,منتظرشم.
+منتظرشم.,I am looking forward to it.
+It was a pleasure.,لذت‌بخش بود.
+لذت‌بخش بود.,It was a pleasure.
+Until next time.,تا دفعه بعد.
+تا دفعه بعد.,Until next time.
+Stay in touch.,در تماس باش.
+در تماس باش.,Stay in touch.
+Write to me.,برام بنویس.
+برام بنویس.,Write to me.
+Send me a message.,برام پیام بفرست.
+برام پیام بفرست.,Send me a message.
+I got your message.,پیامت رو گرفتم.
+پیامت رو گرفتم.,I got your message.
+Reply as soon as possible.,هرچه زودتر جواب بده.
+هرچه زودتر جواب بده.,Reply as soon as possible.
+No rush.,عجله‌ای نیست.
+عجله‌ای نیست.,No rush.
+Take your time.,عجله نکن.
+عجله نکن.,Take your time.
+Time is money.,وقت طلاست.
+وقت طلاست.,Time is money.
+Better late than never.,دیر رسیدن بهتر از هرگز نرسیدن است.
+دیر رسیدن بهتر از هرگز نرسیدن است.,Better late than never.
+Practice every day.,هر روز تمرین کن.
+هر روز تمرین کن.,Practice every day.
+You can do it!,می‌تونی انجامش بدی!
+می‌تونی انجامش بدی!,You can do it!
+Believe in yourself.,به خودت ایمان داشته باش.
+به خودت ایمان داشته باش.,Believe in yourself.
+Never give up.,هرگز تسلیم نشو.
+هرگز تسلیم نشو.,Never give up.
+Keep trying.,ادامه بده تلاش کن.
+ادامه بده تلاش کن.,Keep trying.
+Well done!,آفرین!
+آفرین!,Well done!
+Great job!,کارت عالی بود!
+کارت عالی بود!,Great job!
+I am proud of you.,بهت افتخار می‌کنم.
+بهت افتخار می‌کنم.,I am proud of you.
+You are amazing.,تو فوق‌العاده‌ای.
+تو فوق‌العاده‌ای.,You are amazing.
+This is perfect.,این عالیه.
+این عالیه.,This is perfect.
+Almost perfect.,تقریباً عالیه.
+تقریباً عالیه.,Almost perfect.
+Not bad.,بد نیست.
+بد نیست.,Not bad.
+Could be better.,می‌تونه بهتر باشه.
+می‌تونه بهتر باشه.,Could be better.
+Try harder.,بیشتر تلاش کن.
+بیشتر تلاش کن.,Try harder.
+Do your best.,بهترینت رو انجام بده.
+بهترینت رو انجام بده.,Do your best.
+That is all.,همین.
+همین.,That is all.
+The end.,پایان.
+پایان.,The end.
+One,یک
+یک,One
+Two,دو
+دو,Two
+Three,سه
+سه,Three
+Four,چهار
+چهار,Four
+Five,پنج
+پنج,Five
+Six,شش
+شش,Six
+Seven,هفت
+هفت,Seven
+Eight,هشت
+هشت,Eight
+Nine,نه
+نه,Nine
+Ten,ده
+ده,Ten
+Twenty,بیست
+بیست,Twenty
+Thirty,سی
+سی,Thirty
+Fifty,پنجاه
+پنجاه,Fifty
+One hundred,صد
+صد,One hundred
+One thousand,هزار
+هزار,One thousand
+How many?,چند تا؟
+چند تا؟,How many?
+I have three apples.,من سه تا سیب دارم.
+من سه تا سیب دارم.,I have three apples.
+There are five people.,پنج نفر هستند.
+پنج نفر هستند.,There are five people.
+Monday,دوشنبه
+دوشنبه,Monday
+Tuesday,سه‌شنبه
+سه‌شنبه,Tuesday
+Wednesday,چهارشنبه
+چهارشنبه,Wednesday
+Thursday,پنج‌شنبه
+پنج‌شنبه,Thursday
+Friday,جمعه
+جمعه,Friday
+Saturday,شنبه
+شنبه,Saturday
+Sunday,یکشنبه
+یکشنبه,Sunday
+Morning,صبح
+صبح,Morning
+Afternoon,بعدازظهر
+بعدازظهر,Afternoon
+Evening,عصر
+عصر,Evening
+Night,شب
+شب,Night
+Today,امروز
+امروز,Today
+Tomorrow,فردا
+فردا,Tomorrow
+Yesterday,دیروز
+دیروز,Yesterday
+Next week,هفته آینده
+هفته آینده,Next week
+Last week,هفته گذشته
+هفته گذشته,Last week
+What day is it today?,امروز چه روزی است؟
+امروز چه روزی است؟,What day is it today?
+It is Friday today.,امروز جمعه است.
+امروز جمعه است.,It is Friday today.
+See you next week.,هفته آینده می‌بینمت.
+هفته آینده می‌بینمت.,See you next week.
+Father,پدر
+پدر,Father
+Mother,مادر
+مادر,Mother
+Brother,برادر
+برادر,Brother
+Sister,خواهر
+خواهر,Sister
+Son,پسر
+پسر,Son
+Daughter,دختر
+دختر,Daughter
+Husband,شوهر
+شوهر,Husband
+Wife,همسر
+همسر,Wife
+Grandfather,پدربزرگ
+پدربزرگ,Grandfather
+Grandmother,مادربزرگ
+مادربزرگ,Grandmother
+Uncle,عمو
+عمو,Uncle
+Aunt,عمه
+عمه,Aunt
+This is my family.,این خانواده من است.
+این خانواده من است.,This is my family.
+I love my parents.,من والدینم را دوست دارم.
+من والدینم را دوست دارم.,I love my parents.
+How is your family?,خانواده‌ات چطور هستند؟
+خانواده‌ات چطور هستند؟,How is your family?
+My brother is a doctor.,برادرم دکتر است.
+برادرم دکتر است.,My brother is a doctor.
+Bread,نان
+نان,Bread
+Rice,برنج
+برنج,Rice
+Meat,گوشت
+گوشت,Meat
+Chicken,مرغ
+مرغ,Chicken
+Fish,ماهی
+ماهی,Fish
+Egg,تخم‌مرغ
+تخم‌مرغ,Egg
+Milk,شیر
+شیر,Milk
+Water,آب
+آب,Water
+Tea,چای
+چای,Tea
+Coffee,قهوه
+قهوه,Coffee
+Juice,آبمیوه
+آبمیوه,Juice
+Apple,سیب
+سیب,Apple
+Banana,موز
+موز,Banana
+Orange,پرتقال
+پرتقال,Orange
+Salad,سالاد
+سالاد,Salad
+Soup,سوپ
+سوپ,Soup
+What would you like to eat?,دوست داری چی بخوری؟
+دوست داری چی بخوری؟,What would you like to eat?
+Can I have the menu?,می‌تونم منو رو داشته باشم؟
+می‌تونم منو رو داشته باشم؟,Can I have the menu?
+I am full.,سیر شدم.
+سیر شدم.,I am full.
+This tastes good.,این طعم خوبی داره.
+این طعم خوبی داره.,This tastes good.
+I do not eat meat.,من گوشت نمی‌خورم.
+من گوشت نمی‌خورم.,I do not eat meat.
+Is this spicy?,این تند است؟
+این تند است؟,Is this spicy?
+How much does this cost?,این چقدر قیمت دارد؟
+این چقدر قیمت دارد؟,How much does this cost?
+Do you have a cheaper one?,ارزان‌ترش رو داری؟
+ارزان‌ترش رو داری؟,Do you have a cheaper one?
+I will take this.,این رو برمی‌دارم.
+این رو برمی‌دارم.,I will take this.
+Can I try it on?,می‌تونم امتحانش کنم؟
+می‌تونم امتحانش کنم؟,Can I try it on?
+Where is the fitting room?,اتاق پرو کجاست؟
+اتاق پرو کجاست؟,Where is the fitting room?
+It is too small.,خیلی کوچک است.
+خیلی کوچک است.,It is too small.
+It is too big.,خیلی بزرگ است.
+خیلی بزرگ است.,It is too big.
+Do you accept credit cards?,کارت اعتباری قبول می‌کنید؟
+کارت اعتباری قبول می‌کنید؟,Do you accept credit cards?
+Cash only.,فقط نقدی.
+فقط نقدی.,Cash only.
+Here is your change.,این هم باقی پولت.
+این هم باقی پولت.,Here is your change.
+Thank you for shopping.,ممنون از خریدتون.
+ممنون از خریدتون.,Thank you for shopping.
+Where is the airport?,فرودگاه کجاست؟
+فرودگاه کجاست؟,Where is the airport?
+How do I get to the train station?,چطور به ایستگاه قطار بروم؟
+چطور به ایستگاه قطار بروم؟,How do I get to the train station?
+Is it far from here?,از اینجا دور است؟
+از اینجا دور است؟,Is it far from here?
+Go straight ahead.,مستقیم برو.
+مستقیم برو.,Go straight ahead.
+Turn left at the traffic light.,سر چراغ قرمز به چپ بپیچ.
+سر چراغ قرمز به چپ بپیچ.,Turn left at the traffic light.
+Turn right after the bridge.,بعد از پل به راست بپیچ.
+بعد از پل به راست بپیچ.,Turn right after the bridge.
+It is on the left side.,سمت چپ است.
+سمت چپ است.,It is on the left side.
+It is on the right side.,سمت راست است.
+سمت راست است.,It is on the right side.
+How long does it take?,چقدر طول می‌کشد؟
+چقدر طول می‌کشد؟,How long does it take?
+About twenty minutes.,حدود بیست دقیقه.
+حدود بیست دقیقه.,About twenty minutes.
+I need a taxi.,به تاکسی نیاز دارم.
+به تاکسی نیاز دارم.,I need a taxi.
+Please take me to this address.,لطفاً من را به این آدرس ببر.
+لطفاً من را به این آدرس ببر.,Please take me to this address.
+What is the fare?,کرایه چقدر است؟
+کرایه چقدر است؟,What is the fare?
+I have a reservation.,رزرو دارم.
+رزرو دارم.,I have a reservation.
+Where is my seat?,صندلی من کجاست؟
+صندلی من کجاست؟,Where is my seat?
+How is the weather today?,هوا امروز چطور است؟
+هوا امروز چطور است؟,How is the weather today?
+It is cloudy.,ابری است.
+ابری است.,It is cloudy.
+It is snowing.,برف می‌بارد.
+برف می‌بارد.,It is snowing.
+It is windy.,باد می‌وزد.
+باد می‌وزد.,It is windy.
+It is hot today.,امروز گرم است.
+امروز گرم است.,It is hot today.
+It is cold outside.,بیرون سرد است.
+بیرون سرد است.,It is cold outside.
+What is the temperature?,دما چند درجه است؟
+دما چند درجه است؟,What is the temperature?
+It will rain tomorrow.,فردا باران خواهد بارید.
+فردا باران خواهد بارید.,It will rain tomorrow.
+Take an umbrella.,چتر بردار.
+چتر بردار.,Take an umbrella.
+I am happy.,خوشحالم.
+خوشحالم.,I am happy.
+I am sad.,غمگینم.
+غمگینم.,I am sad.
+I am angry.,عصبانی‌ام.
+عصبانی‌ام.,I am angry.
+I am tired.,خسته‌ام.
+خسته‌ام.,I am tired.
+I am excited.,هیجان‌زده‌ام.
+هیجان‌زده‌ام.,I am excited.
+I am worried.,نگرانم.
+نگرانم.,I am worried.
+I am surprised.,متعجبم.
+متعجبم.,I am surprised.
+I am bored.,حوصله‌ام سر رفته.
+حوصله‌ام سر رفته.,I am bored.
+I feel good.,حس خوبی دارم.
+حس خوبی دارم.,I feel good.
+I feel bad.,حس بدی دارم.
+حس بدی دارم.,I feel bad.
+What is wrong?,چه شده؟
+چه شده؟,What is wrong?
+Do not worry about it.,نگرانش نباش.
+نگرانش نباش.,Do not worry about it.
+What is your job?,شغلت چیست؟
+شغلت چیست؟,What is your job?
+Where do you work?,کجا کار می‌کنی؟
+کجا کار می‌کنی؟,Where do you work?
+How long have you lived here?,چقدر است که اینجا زندگی می‌کنی؟
+چقدر است که اینجا زندگی می‌کنی؟,How long have you lived here?
+Do you like your job?,شغلت را دوست داری؟
+شغلت را دوست داری؟,Do you like your job?
+What are your hobbies?,سرگرمی‌هایت چیست؟
+سرگرمی‌هایت چیست؟,What are your hobbies?
+I like reading.,کتاب خواندن را دوست دارم.
+کتاب خواندن را دوست دارم.,I like reading.
+I like sports.,ورزش را دوست دارم.
+ورزش را دوست دارم.,I like sports.
+Do you play football?,فوتبال بازی می‌کنی؟
+فوتبال بازی می‌کنی؟,Do you play football?
+"Yes, I play football.",بله، فوتبال بازی می‌کنم.
+بله، فوتبال بازی می‌کنم.,"Yes, I play football."
+What is your favorite movie?,فیلم مورد علاقه‌ات چیست؟
+فیلم مورد علاقه‌ات چیست؟,What is your favorite movie?
+What kind of music do you like?,چه نوع موسیقی دوست داری؟
+چه نوع موسیقی دوست داری؟,What kind of music do you like?
+I wake up at seven.,ساعت هفت بیدار می‌شوم.
+ساعت هفت بیدار می‌شوم.,I wake up at seven.
+I go to bed at eleven.,ساعت یازده می‌خوابم.
+ساعت یازده می‌خوابم.,I go to bed at eleven.
+I brush my teeth.,دندان‌هایم را مسواک می‌زنم.
+دندان‌هایم را مسواک می‌زنم.,I brush my teeth.
+I take a shower.,دوش می‌گیرم.
+دوش می‌گیرم.,I take a shower.
+I have breakfast.,صبحانه می‌خورم.
+صبحانه می‌خورم.,I have breakfast.
+I go to work.,به سر کار می‌روم.
+به سر کار می‌روم.,I go to work.
+I come back home.,به خانه برمی‌گردم.
+به خانه برمی‌گردم.,I come back home.
+I watch television.,تلویزیون تماشا می‌کنم.
+تلویزیون تماشا می‌کنم.,I watch television.
+I read a book before bed.,قبل از خواب کتاب می‌خوانم.
+قبل از خواب کتاب می‌خوانم.,I read a book before bed.
+I have a cold.,سرما خورده‌ام.
+سرما خورده‌ام.,I have a cold.
+I have a fever.,تب دارم.
+تب دارم.,I have a fever.
+My head hurts.,سردرد دارم.
+سردرد دارم.,My head hurts.
+My stomach hurts.,دل‌درد دارم.
+دل‌درد دارم.,My stomach hurts.
+I need medicine.,به دارو نیاز دارم.
+به دارو نیاز دارم.,I need medicine.
+Where is the pharmacy?,داروخانه کجاست؟
+داروخانه کجاست؟,Where is the pharmacy?
+I need to see a doctor.,باید دکتر بروم.
+باید دکتر بروم.,I need to see a doctor.
+Are you feeling better?,حالت بهتر شده؟
+حالت بهتر شده؟,Are you feeling better?
+Would you mind...?,اشکالی ندارد اگر...؟
+اشکالی ندارد اگر...؟,Would you mind...?
+Could you please...?,ممکن است لطفاً...؟
+ممکن است لطفاً...؟,Could you please...?
+I would like...,مایل هستم...
+مایل هستم...,I would like...
+May I...?,ممکن است من...؟
+ممکن است من...؟,May I...?
+Is it possible...?,آیا ممکن است...؟
+آیا ممکن است...؟,Is it possible...?
+I am afraid I cannot.,متأسفانه نمی‌توانم.
+متأسفانه نمی‌توانم.,I am afraid I cannot.
+That would be great.,عالی می‌شود.
+عالی می‌شود.,That would be great.
+I really appreciate it.,واقعاً قدردانم.
+واقعاً قدردانم.,I really appreciate it.
+You are too kind.,خیلی لطف دارید.
+خیلی لطف دارید.,You are too kind.
+Could you tell me how to get to the museum?,می‌توانید بگویید چطور به موزه بروم؟
+می‌توانید بگویید چطور به موزه بروم؟,Could you tell me how to get to the museum?
+I am looking for a good restaurant nearby.,دنبال یک رستوران خوب در نزدیکی اینجا هستم.
+دنبال یک رستوران خوب در نزدیکی اینجا هستم.,I am looking for a good restaurant nearby.
+Do you know if there is a bank around here?,می‌دانید آیا بانکی در این اطراف هست؟
+می‌دانید آیا بانکی در این اطراف هست؟,Do you know if there is a bank around here?
+I would like to book a table for two people.,می‌خواهم یک میز برای دو نفر رزرو کنم.
+می‌خواهم یک میز برای دو نفر رزرو کنم.,I would like to book a table for two people.
+What time does the store open?,مغازه ساعت چند باز می‌شود؟
+مغازه ساعت چند باز می‌شود؟,What time does the store open?
+What time does the store close?,مغازه ساعت چند بسته می‌شود؟
+مغازه ساعت چند بسته می‌شود؟,What time does the store close?
+I forgot my password.,رمز عبورم را فراموش کردم.
+رمز عبورم را فراموش کردم.,I forgot my password.
+Can you help me reset it?,می‌توانی کمکم کنی آن را ریست کنم؟
+می‌توانی کمکم کنی آن را ریست کنم؟,Can you help me reset it?
+The internet is not working.,اینترنت کار نمی‌کند.
+اینترنت کار نمی‌کند.,The internet is not working.
+My phone battery is low.,باتری گوشیم کم است.
+باتری گوشیم کم است.,My phone battery is low.
+Do you have a charger?,شارژر داری؟
+شارژر داری؟,Do you have a charger?
+I need to charge my phone.,باید گوشی‌ام را شارژ کنم.
+باید گوشی‌ام را شارژ کنم.,I need to charge my phone.
+This is my first time here.,اولین بار است که اینجا می‌آیم.
+اولین بار است که اینجا می‌آیم.,This is my first time here.
+I am a tourist.,من توریست هستم.
+من توریست هستم.,I am a tourist.
+Can you take a photo of us?,می‌توانی از ما عکس بگیری؟
+می‌توانی از ما عکس بگیری؟,Can you take a photo of us?
+Smile please!,لطفاً لبخند بزنید!
+لطفاً لبخند بزنید!,Smile please!
+How was your trip?,سفرت چطور بود؟
+سفرت چطور بود؟,How was your trip?
+It was wonderful.,عالی بود.
+عالی بود.,It was wonderful.
+I had a great time.,خیلی خوش گذشت.
+خیلی خوش گذشت.,I had a great time.
+I hope to visit again soon.,امیدوارم به زودی دوباره سر بزنم.
+امیدوارم به زودی دوباره سر بزنم.,I hope to visit again soon.
+Red,قرمز
+قرمز,Red
+Blue,آبی
+آبی,Blue
+Green,سبز
+سبز,Green
+Yellow,زرد
+زرد,Yellow
+Black,سیاه
+سیاه,Black
+White,سفید
+سفید,White
+Orange,نارنجی
+نارنجی,Orange
+Purple,بنفش
+بنفش,Purple
+Pink,صورتی
+صورتی,Pink
+Brown,قهوه‌ای
+قهوه‌ای,Brown
+What color is this?,این چه رنگی است؟
+این چه رنگی است؟,What color is this?
+My favorite color is green.,رنگ مورد علاقه‌ام سبز است.
+رنگ مورد علاقه‌ام سبز است.,My favorite color is green.
+Dog,سگ
+سگ,Dog
+Cat,گربه
+گربه,Cat
+Bird,پرنده
+پرنده,Bird
+Horse,اسب
+اسب,Horse
+Cow,گاو
+گاو,Cow
+I have a pet dog.,من یک سگ خانگی دارم.
+من یک سگ خانگی دارم.,I have a pet dog.
+The cat is sleeping.,گربه خوابیده است.
+گربه خوابیده است.,The cat is sleeping.
+House,خانه
+خانه,House
+Room,اتاق
+اتاق,Room
+Kitchen,آشپزخانه
+آشپزخانه,Kitchen
+Bathroom,حمام
+حمام,Bathroom
+Bedroom,اتاق خواب
+اتاق خواب,Bedroom
+Door,در
+در,Door
+Window,پنجره
+پنجره,Window
+Table,میز
+میز,Table
+Chair,صندلی
+صندلی,Chair
+Bed,تخت
+تخت,Bed
+Where is the kitchen?,آشپزخانه کجاست؟
+آشپزخانه کجاست؟,Where is the kitchen?
+Please open the window.,لطفاً پنجره را باز کن.
+لطفاً پنجره را باز کن.,Please open the window.
+Close the door please.,لطفاً در را ببند.
+لطفاً در را ببند.,Close the door please.
+I work in an office.,من در یک دفتر کار می‌کنم.
+من در یک دفتر کار می‌کنم.,I work in an office.
+I study at university.,من در دانشگاه درس می‌خوانم.
+من در دانشگاه درس می‌خوانم.,I study at university.
+What subject do you study?,چه رشته‌ای می‌خوانی؟
+چه رشته‌ای می‌خوانی؟,What subject do you study?
+I study computer science.,علوم کامپیوتر می‌خوانم.
+علوم کامپیوتر می‌خوانم.,I study computer science.
+I have a meeting tomorrow.,فردا جلسه دارم.
+فردا جلسه دارم.,I have a meeting tomorrow.
+I am busy at work.,سر کار سرم شلوغ است.
+سر کار سرم شلوغ است.,I am busy at work.
+Can we reschedule?,می‌توانیم زمان را تغییر دهیم؟
+می‌توانیم زمان را تغییر دهیم؟,Can we reschedule?
+I sent you an email.,برات ایمیل فرستادم.
+برات ایمیل فرستادم.,I sent you an email.
+Please check your email.,لطفاً ایمیلت را چک کن.
+لطفاً ایمیلت را چک کن.,Please check your email.
+What does this word mean?,این کلمه یعنی چه؟
+این کلمه یعنی چه؟,What does this word mean?
+How do you say this in Persian?,این را به فارسی چطور می‌گویند؟
+این را به فارسی چطور می‌گویند؟,How do you say this in Persian?
+How do you say this in English?,این را به انگلیسی چطور می‌گویند؟
+این را به انگلیسی چطور می‌گویند؟,How do you say this in English?
+Can you write it down?,می‌توانی بنویسیش؟
+می‌توانی بنویسیش؟,Can you write it down?
+Please speak more slowly.,لطفاً آهسته‌تر صحبت کن.
+لطفاً آهسته‌تر صحبت کن.,Please speak more slowly.
+I am still learning.,هنوز دارم یاد می‌گیرم.
+هنوز دارم یاد می‌گیرم.,I am still learning.
+My Persian is not very good.,فارسی‌ام خیلی خوب نیست.
+فارسی‌ام خیلی خوب نیست.,My Persian is not very good.
+My English is not perfect.,انگلیسی‌ام کامل نیست.
+انگلیسی‌ام کامل نیست.,My English is not perfect.
+You speak very well.,خیلی خوب صحبت می‌کنی.
+خیلی خوب صحبت می‌کنی.,You speak very well.
+Keep practicing.,به تمرین ادامه بده.
+به تمرین ادامه بده.,Keep practicing.
+I made a mistake.,اشتباه کردم.
+اشتباه کردم.,I made a mistake.
+It is okay to make mistakes.,اشتباه کردن اشکالی ندارد.
+اشتباه کردن اشکالی ندارد.,It is okay to make mistakes.
+Learn from your mistakes.,از اشتباهاتت یاد بگیر.
+از اشتباهاتت یاد بگیر.,Learn from your mistakes.
+Never stop learning.,هرگز از یادگیری دست نکش.
+هرگز از یادگیری دست نکش.,Never stop learning.
