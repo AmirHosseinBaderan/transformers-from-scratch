@@ -31,7 +31,7 @@ class T5Config:
     BATCH_SIZE = ModelConfig.BATCH_SIZE
     GRADIENT_ACCUMULATION_STEPS = ModelConfig.GRADIENT_ACCUMULATION_STEPS
     LEARNING_RATE = ModelConfig.LEARNING_RATE
-    EPOCHS = 20
+    EPOCHS = 50
 
     # Memory optimization (from ModelConfig)
     USE_MIXED_PRECISION = ModelConfig.USE_MIXED_PRECISION
