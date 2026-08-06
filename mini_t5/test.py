@@ -1,19 +1,23 @@
 import torch
 
-from modules.layer_norm import LayerNorm
+from modules.encoder_block import EncoderBlock
 
 
 x = torch.randn(
     2,
-    10,
-    64
+    20,
+    128
 )
 
 
-norm = LayerNorm(64)
+block = EncoderBlock(
+    embedding_dim=128,
+    num_heads=8,
+    ff_hidden_dim=512
+)
 
 
-out = norm(x)
+out = block(x)
 
 
 print(out.shape)
