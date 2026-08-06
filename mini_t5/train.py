@@ -173,7 +173,6 @@ def main():
         for epoch in range(start_epoch, T5Config.EPOCHS):
             logger.info(f"Start epoch: {epoch + 1}")
 
-            # Training
             train_loss = train_one_epoch(
                 model=model,
                 loader=train_loader,
@@ -186,12 +185,10 @@ def main():
                 gradient_clip_norm=T5Config.GRADIENT_CLIP_NORM,
             )
 
-            # Aggressive cleanup after training before validation
             if torch.cuda.is_available():
                 torch.cuda.empty_cache()
             gc.collect()
 
-            # Validation
             val_loss = validate_one_epoch(
                 model=model,
                 loader=val_loader,
@@ -200,28 +197,22 @@ def main():
                 tokenizer=tokenizer,
             )
 
-            # Aggressive cleanup after validation
             if torch.cuda.is_available():
                 torch.cuda.empty_cache()
             gc.collect()
 
-            # Log metrics
             tb_logger.log_training_loss(train_loss, epoch)
             tb_logger.log_validation_loss(val_loss, epoch)
 
-            # Log learning rate
             current_lr = optimizer.param_groups[0]["lr"]
             tb_logger.log_learning_rate(current_lr, epoch)
 
-            # Check if this is the best model
             is_best = val_loss < checkpoint_manager.best_val_loss
 
-            # Sync early stopping state to checkpoint manager
             checkpoint_manager.early_stopping_state = (
                 early_stopping.state_dict()
             )
 
-            # Save checkpoint
             checkpoint_manager.save(
                 epoch=epoch + 1,
                 train_loss=train_loss,
@@ -229,12 +220,10 @@ def main():
                 is_best=is_best,
             )
 
-            # Early stopping check
             if early_stopping(val_loss):
                 logger.info("Early stopping triggered!")
                 break
 
-            # Extra cleanup between epochs
             if torch.cuda.is_available():
                 torch.cuda.empty_cache()
             gc.collect()
@@ -251,7 +240,6 @@ def main():
             logger.error("  6. Close other applications")
         raise
     finally:
-        # Clean up loaders to free file mappings
         del train_loader, val_loader
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
