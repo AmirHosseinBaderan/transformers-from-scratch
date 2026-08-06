@@ -40,7 +40,8 @@ def load_best_model():
     try:
         checkpoint = torch.load(best_path, map_location=T5Config.DEVICE)
         model.load_state_dict(checkpoint["model_state_dict"])
-        logger.info(f"Loaded best model from {best_path}")
+        epoch = checkpoint.get("epoch", "unknown")
+        logger.info(f"Loaded best model from {best_path} (epoch {epoch})")
     except FileNotFoundError:
         logger.error(f"Best model not found at {best_path}. Please train the model first.")
         raise
