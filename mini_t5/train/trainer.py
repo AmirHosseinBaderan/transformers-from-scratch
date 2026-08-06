@@ -17,8 +17,8 @@ from mini_t5.config import T5Config
 from mini_t5.model import MiniT5
 from mini_t5.modules.dataset import TranslationDataset
 from mini_t5.modules.tokenizer import CharacterTokenizer
-from mini_t5.train_one_epoch import train_one_epoch
-from mini_t5.validate_one_epoch import validate_one_epoch
+from mini_t5.train.train_one_epoch import train_one_epoch
+from mini_t5.train.validate_one_epoch import validate_one_epoch
 
 if TYPE_CHECKING:
     from torch.utils.data import DataLoader

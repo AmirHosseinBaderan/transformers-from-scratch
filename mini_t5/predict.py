@@ -3,7 +3,6 @@ import torch
 from mini_t5.config import T5Config
 from mini_t5.model import MiniT5
 from mini_t5.modules.tokenizer import CharacterTokenizer
-from mini_t5.trainer import build_trainer
 
 from common.utils.logger import logger
 

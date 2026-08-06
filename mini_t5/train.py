@@ -9,7 +9,7 @@ from common.training.tensorboard_logger import TensorBoardLogger
 from common.utils.logger import logger
 
 from mini_t5.config import T5Config
-from mini_t5.trainer import build_trainer
+from mini_t5.train.trainer import build_trainer
 
 
 def main():
