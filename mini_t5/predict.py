@@ -15,8 +15,9 @@ def load_best_model():
     """
 
     # Load tokenizer from training
-    tokenizer = CharacterTokenizer.load(
-        T5Config.TOKENIZER_PATH
+    tokenizer = CharacterTokenizer()
+    tokenizer.load(
+       T5Config.TOKENIZER_PATH
     )
 
 
