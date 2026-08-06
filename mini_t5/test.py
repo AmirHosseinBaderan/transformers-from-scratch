@@ -1,13 +1,13 @@
 import torch
 
-from decoder import T5Decoder
+from model import MiniT5
 
 
 
-decoder = T5Decoder(
-    vocab_size=1000,
+model = MiniT5(
+    vocab_size=500,
     embedding_dim=128,
-    num_layers=3,
+    num_layers=2,
     num_heads=8,
     ff_hidden_dim=512,
     max_length=64
@@ -15,27 +15,25 @@ decoder = T5Decoder(
 
 
 
+encoder_input = torch.randint(
+    0,
+    500,
+    (4,20)
+)
+
+
 decoder_input = torch.randint(
     0,
-    1000,
-    (2,15)
+    500,
+    (4,15)
 )
 
 
 
-encoder_output = torch.randn(
-    2,
-    20,
-    128
+output = model(
+    encoder_input,
+    decoder_input
 )
 
 
-
-out = decoder(
-    decoder_input,
-    encoder_output
-)
-
-
-
-print(out.shape)
+print(output.shape)
