@@ -50,9 +50,17 @@ def validate_one_epoch(
                 non_blocking=True,
             )
 
+            # Generate padding masks
+            encoder_mask = (
+                encoder_input_ids != tokenizer.pad_id
+            ).unsqueeze(1).unsqueeze(2)
+            cross_mask = encoder_mask
+
             logits = model(
                 encoder_input_ids,
                 decoder_input_ids,
+                encoder_mask=encoder_mask,
+                cross_mask=cross_mask,
             )
             loss = criterion(
                 logits.view(-1, tokenizer.vocab_size),
